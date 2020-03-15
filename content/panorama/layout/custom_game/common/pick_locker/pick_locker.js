@@ -29,6 +29,7 @@ function _InitPickLocker(data) {
 		pick_button.BAcceptsInput(false)
 		pick_button.style.saturation = 0.0
 		pick_button.style.brightness = 0.2
+		pick_button.GetChild(0).style.textTransform = "lowercase"
 		pick_button.GetChild(0).text = $.Localize("#SupportersOnly") + " (" + time + ")"
 		_UpdatePickButton(time, pick_button)
 	}

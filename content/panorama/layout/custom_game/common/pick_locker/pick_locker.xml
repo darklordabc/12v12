@@ -1,7 +1,4 @@
 <root>
-	<styles>
-		<include src="file://{resources}/layout/custom_game/common/pick_locker/pick_locker.css" />
-	</styles>
 	<scripts>
 		<include src="file://{resources}/layout/custom_game/common/utils.js" />
 		<include src="file://{resources}/layout/custom_game/common/pick_locker/pick_locker.js" />
