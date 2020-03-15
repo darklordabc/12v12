@@ -19,15 +19,22 @@ function _UpdatePickButton(time, button) {
 	})
 }
 
-(function() {
-	$.Msg("Locking pick button, patreon level: ", patreonLevel)
+function _InitPickLocker(data) {
+	$.Msg("Locking pick button, patreon level: ", data.level)
 	let pick_button = FindDotaHudElement("LockInButton")
 
-	if (patreonLevel < 2) {
+	if (data.level < 2) {
+		let time = wait_time[data.level]
 		pick_button.SetAcceptsFocus(false)
 		pick_button.BAcceptsInput(false)
 		pick_button.style.saturation = 0.0
 		pick_button.style.brightness = 0.2
-		_UpdatePickButton(wait_time[patreonLevel], pick_button)
+		pick_button.GetChild(0).text = $.Localize("#SupportersOnly") + " (" + time + ")"
+		_UpdatePickButton(time, pick_button)
 	}
+}
+
+(function() {
+	GameEvents.SendCustomGameEventToServer("request_patreon_level", {})
+	GameEvents.Subscribe("report_patreon_level", _InitPickLocker)
 })()

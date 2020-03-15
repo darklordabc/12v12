@@ -4,7 +4,6 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/layout/custom_game/common/utils.js" />
-		<include src="file://{resources}/layout/custom_game/common/patreon/patreon.js" />
 		<include src="file://{resources}/layout/custom_game/common/pick_locker/pick_locker.js" />
 	</scripts>
 

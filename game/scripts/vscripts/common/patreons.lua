@@ -148,6 +148,13 @@ RegisterCustomEventListener("patreon:payments:create", function(args)
 	)
 end)
 
+RegisterCustomEventListener("request_patreon_level", function(args) 
+	local playerId = args.PlayerID
+	local patreon_settings = Patreons:GetPlayerSettings(playerId)
+	local player = PlayerResource:GetPlayer(playerId)
+	CustomGameEventManager:Send_ServerToPlayer(player, "report_patreon_level", {level = patreon_settings.level})
+end)
+
 MatchEvents.ResponseHandlers.paymentUpdate = function(response)
 	local steamId = response.steamId
 	local playerId = GetPlayerIdBySteamId(steamId)
