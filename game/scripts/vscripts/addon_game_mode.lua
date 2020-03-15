@@ -800,7 +800,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 		})
 		Timers:CreateTimer({
 			useGameTime = false,
-			endTime = 30,
+			endTime = 3,
 			callback = function()
 				PauseGame(false)
 				Timers:RemoveTimer("pause_start_game")

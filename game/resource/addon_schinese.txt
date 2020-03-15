@@ -373,6 +373,6 @@
 		"DOTA_Tooltip_patreon_perk_outcomming_heal_amplify_t1"	"个人特权： 治疗增强"
 		"DOTA_Tooltip_patreon_perk_outcomming_heal_amplify_t2"	"个人特权： 治疗增强"
 
-
+		"SupportersOnly"						"仅支持者"
 	}
 }
