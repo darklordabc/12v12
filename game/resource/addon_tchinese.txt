@@ -166,6 +166,7 @@
 		"cannot_voite_against_high_tier_patreons"					    "你不能投票给高级赞助者"
 		"target_has_troll_debuff_with_voiting"					   		"该玩家已被惩罚"
 
+		"HighSupportersOnly"					"僅限高級支持者"
 		"SupportersOnly"						"僅支持者"
 	}
 }
