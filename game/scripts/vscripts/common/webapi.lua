@@ -174,14 +174,10 @@ function WebApi:AfterMatch(winnerTeam)
 end
 function WebApi:PatreonPlayerUpdate(updates)
 	local requestBody = {
-		customGame = WebApi.customGame,
-		matchId = isTesting and RandomInt(1, 10000000) or tonumber(tostring(GameRules:GetMatchID())),
-		mapName = GetMapName(),
 		players = {}
 	}
-	for key, value in pairs(updates) do
+	for playerId, patreonUpdate in pairs(updates) do
 		table.insert(requestBody.players, {
-			playerId = key,
 			steamId = tostring(PlayerResource:GetSteamID(key)),
 			patreonUpdate = value
 		});	

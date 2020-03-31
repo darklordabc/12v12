@@ -1,6 +1,7 @@
 Patreons = Patreons or {}
 Patreons.playerSettings = Patreons.playerSettings or {}
 Patreons.openPaymentWindows = Patreons.openPaymentWindows or {}
+Patreons.pendingPlayerUpdates = {}
 
 local colorNames = {
 	White = Vector(255, 255, 255),
@@ -36,15 +37,14 @@ function Patreons:GetPlayerEmblemColor(playerId)
 	return colorNames[Patreons:GetPlayerSettings(playerId).emblemColor]
 end
 
-pendingPlayerUpdates = {}
 function Patreons:SetPlayerSettings(playerId, settings)
 
 	Patreons.playerSettings[playerId] = settings
 	CustomNetTables:SetTableValue("game_state", "patreon_bonuses", Patreons.playerSettings)
-	pendingPlayerUpdates[playerId] = settings
+	Patreons.pendingPlayerUpdates[playerId] = settings
 	GameRules:GetGameModeEntity():SetThink(function()
-		WebApi:PatreonPlayerUpdate(pendingPlayerUpdates)
-		q = {}
+		WebApi:PatreonPlayerUpdate(Patreons.pendingPlayerUpdates)
+		Patreons.pendingPlayerUpdates = {}
 	end, "debounce_player_settings", 10)
 end
 
@@ -89,7 +89,6 @@ RegisterCustomEventListener("patreon_toggle_emblem", function(args)
 end)
 
 -- TODO: It's not really related to patreon, it'd be better to extract player options to a different module
-
 
 RegisterCustomEventListener("patreon_update_chat_wheel_favorites", function(args)
 	local playerId = args.PlayerID
