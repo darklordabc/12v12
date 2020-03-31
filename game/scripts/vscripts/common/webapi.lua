@@ -1,6 +1,7 @@
 WebApi = WebApi or {}
 
-local isTesting = IsInToolsMode() and false
+
+local isTesting = true --IsInToolsMode() and false
 local serverHost = IsInToolsMode() and "http://127.0.0.1:5000" or "http://163.172.174.77:8000"
 local dedicatedServerKey = GetDedicatedServerKeyV2("1")
 
@@ -171,7 +172,23 @@ function WebApi:AfterMatch(winnerTeam)
 		WebApi:Send("match/after", requestBody)
 	end
 end
-
+function WebApi:PatreonPlayerUpdate(updates)
+	local requestBody = {
+		customGame = WebApi.customGame,
+		matchId = isTesting and RandomInt(1, 10000000) or tonumber(tostring(GameRules:GetMatchID())),
+		mapName = GetMapName(),
+		players = {}
+	}
+	for key, value in pairs(updates) do
+		table.insert(requestBody.players, {
+			playerId = key,
+			steamId = tostring(PlayerResource:GetSteamID(key)),
+			patreonUpdate = value
+		});	
+	end
+	
+	WebApi:Send("match/patreon_player_update", requestBody)
+end
 RegisterGameEventListener("player_connect_full", function()
 	if WebApi.firstPlayerLoaded then return end
 	WebApi.firstPlayerLoaded = true
