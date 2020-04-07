@@ -796,7 +796,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 		})
 		Timers:CreateTimer({
 			useGameTime = false,
-			endTime = 30,
+			endTime = (IsInToolsMode() and 0) or 30,
 			callback = function()
 				PauseGame(false)
 				Timers:RemoveTimer("pause_start_game")
@@ -1216,8 +1216,10 @@ function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
 			if (orderType == DOTA_UNIT_ORDER_DROP_ITEM or orderType == DOTA_UNIT_ORDER_GIVE_ITEM) and ability and ability:IsItem() then
 				local purchaser = ability:GetPurchaser()
 				if purchaser and purchaser:GetPlayerID() ~= playerId then
-					--CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerId), "display_custom_error", { message = "#hud_error_courier_cant_order_item" })
-					return false
+					if purchaser:GetTeam() == PlayerResource:GetPlayer(playerId):GetTeam() then
+						--CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerId), "display_custom_error", { message = "#hud_error_courier_cant_order_item" })
+						return false
+					end
 				end
 			end
 		end
@@ -1646,7 +1648,7 @@ SelectVO = function(keys)
 				"soundboard.next_level",
 				"soundboard.oy_oy_oy",
 				"soundboard.ta_daaaa",
-				"soundboard.ceeb",--need fix
+				"soundboard.ceb.start",--need fix
 				"soundboard.goodness_gracious",
 				--epic2
 				"soundboard.nakupuuu",
@@ -2888,6 +2890,13 @@ function ChatSound(phrase, playerId)
 	for _, hero in pairs(all_heroes) do
 		if hero:IsRealHero() and hero:IsControllableByAnyPlayer() and hero:GetPlayerID() and (not _G.tPlayersMuted[hero:GetPlayerID()] or not _G.tPlayersMuted[hero:GetPlayerID()][playerId]) then
 			EmitAnnouncerSoundForPlayer(phrase, hero:GetPlayerID())
+			if phrase == "soundboard.ceb.start" then
+				Timers:CreateTimer(2, function()
+					StopGlobalSound("soundboard.ceb.start")
+					EmitAnnouncerSoundForPlayer("soundboard.ceb.stop", hero:GetPlayerID())
+				end
+				)
+			end
 		end
 	end
 end

@@ -64,6 +64,8 @@ local disabledAbilities = {
 	pugna_decrepify = true,
 	furion_sprout = true,
 	tiny_toss = true,
+	snapfire_firesnap_cookie = true,
+	snapfire_gobble_up = true,
 }
 
 function DisableHelp.ExecuteOrderFilter(orderType, ability, target, unit, orderVector, units)
@@ -108,7 +110,10 @@ function DisableHelp.ExecuteOrderFilter(orderType, ability, target, unit, orderV
 					FIND_ANY_ORDER,
 					false
 				)
-				if #allies > 0 then
+				for i,x in pairs(allies) do
+					if x==unit then allies[i] = nil end
+				end
+ 				if #allies > 0 then
 					DisplayError(caster_id, "dota_hud_error_target_has_disable_help")
 					return false
 				end

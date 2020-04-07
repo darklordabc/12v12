@@ -118,7 +118,6 @@
 		
 		"DOTA_Tooltip_modifier_silencer_new_int_steal"					"所窃取智力"
 		"DOTA_Tooltip_modifier_silencer_new_int_steal_Description"		"沉默术士在完成击杀或者辅助击杀后会偷取目标智力."
-		"DOTA_Tooltip_ability_special_bonus_unique_silencer_2"			"+1 智力窃取"
 
 		"DOTA_Tooltip_modifier_troll_feed_token_couter"					"不良玩家恶意送人头计数代币"
 		"DOTA_Tooltip_modifier_troll_debuff_stop_feed"					"送人头惩罚"

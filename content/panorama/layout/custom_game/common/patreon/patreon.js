@@ -37,29 +37,6 @@ class PatreonPerk {
 		}
 	}
 }
-
-//class FreeBoots extends PatreonPerk {
-//	constructor() {
-//		super( "boots_free", 1 )
-//
-//		this.button = $.CreatePanel( "ToggleButton", this.panel.FindChildTraverse( "PatreonPerkAdditional" ), "" )
-//		this.button.text = $.Localize( "#boots_enable" )
-//		this.button.style["margin-top"] = "18px"
-//
-//		let btn = this.button
-//
-//		this.button.SetPanelEvent( "onactivate", function() {
-//			if ( isPatron ) {
-//				GameEvents.SendCustomGameEventToServer( "patreon_toggle_boots", { enabled: !!btn.checked } )
-//			}
-//		} )
-//	}
-//
-//	Enable( bool ) {
-//		this.button.checked = bool
-//	}
-//}
-
 function Divider() {
 	let panel = $.CreatePanel( "Panel", $( "#PatreonPerksContainer" ), "" )
 	panel.AddClass( "Divider" )
@@ -249,8 +226,6 @@ function CloseVOIconButton() {
 
 $.GetContextPanel().RemoveClass('IsPatron');
 
-//var boots = new FreeBoots()
-//Divider()
 new PatreonPerk( "our_thanks_and_appreciation", 1 )
 Divider()
 new PatreonPerk( "supporter_perks_low", 1 )
@@ -292,6 +267,72 @@ SubscribeToNetTableKey('game_state', 'patreon_bonuses', function (data) {
 	//	$('#PatreonSupporterStatus').SetDialogVariable('support_end_date', formatDate(endDate));
 	//}
 });
+
+GameEvents.Subscribe('patreon:gift:notification', function(data) {
+	$('#GiftNotificationAvatar').steamid =  Game.GetPlayerInfo(data.playerId).player_steamid
+	$('#GiftNotificationName').text = Players.GetPlayerName(data.playerId)
+	$('#GiftNotificationLabel').text = $.Localize('#received_gift_' + data.level)
+	$('#GiftNotificationPanel').style.opacity = 1;
+
+	Particles.CreateParticle("particles/patreon_gift_tier_" + data.level + ".vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, 0)
+	if (data.level == 1) {
+		Game.EmitSound("Waitingforplayers_Boost_Shared")
+		Game.EmitSound("Loot_Drop_Stinger_Rare")
+	} else if (data.level == 2) {
+		Game.EmitSound("Waitingforplayers_Boost_Shared")
+		Game.EmitSound("Loot_Drop_Stinger_Ancient")
+	}
+
+	giftNotificationRemainingTime = 8;
+	if (giftNotificationScheduler) {
+		$.CancelScheduled(giftNotificationScheduler);
+	}
+	giftNotificationScheduler = $.Schedule(0.1, GiftNotificationTick);
+});
+
+function GiftNotificationTick() {
+	giftNotificationRemainingTime -= 0.1;
+	if (giftNotificationRemainingTime > 0) {
+		giftNotificationScheduler = $.Schedule(0.1, GiftNotificationTick);
+	} else {
+		$('#GiftNotificationPanel').style.opacity = 0;
+		giftNotificationScheduler = false;
+	}
+}
+
+function UpdatePaymentTargetList(patreonData) {
+	if (donation_target_dropdown) {
+		for(var id = 0; id <= 23; id++) {
+			if (Players.IsValidPlayerID(id)) {
+				if (patreonData[id] && patreonData[id].level > 0) {
+					var this_player_option = $('#PatreonOption' + id);
+					if (this_player_option) {
+						this_player_option.DeleteAsync(0)
+					}
+				}
+			}
+		}
+	} else {
+		var dropdown_parent = $('#PaymentWindowUserSelectorContainer');
+		donation_target_dropdown = $.CreatePanel('DropDown', dropdown_parent, 'PaymentWindowDropDown');
+		var layout_string = '<root><DropDown style="margin-left: 5px;" oninputsubmit="updatePaymentWindow()" >';
+
+		for(var id = 0; id <= 23; id++) {
+			if (Players.IsValidPlayerID(id)) {
+				if (!patreonData[id] || patreonData[id].level <= 0) {
+					layout_string += `<Label text="${Players.GetPlayerName(id)}" id="PatreonOption${id}" onmouseover="UpdatePaymentTarget(${id})" />`;
+				}
+			}
+		}
+		layout_string = layout_string + '</DropDown></root>';
+		donation_target_dropdown.BLoadLayoutFromString(layout_string, false, true);
+	}
+}
+
+function UpdatePaymentTarget(id) {
+	$('#PaymentWindowAvatar').steamid = Game.GetPlayerInfo(id).player_steamid;
+	paymentTargetID = id;
+}
 
 setInterval(updatePatreonButton, 1000);
 $('#PatreonWindow').visible = false;

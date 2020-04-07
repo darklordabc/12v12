@@ -1,11 +1,5 @@
 var isPatreon = false;
 
-function TogglePatreonBonusButton() {
-	if (!isPatreon) return;
-	var enabled = $('#PatreonBonusButton').checked;
-	GameEvents.SendCustomGameEventToServer("patreon_toggle_boots", { enabled: enabled } );
-}
-
 function OnMouseOver() {
 	if (isPatreon) return;
 	$.DispatchEvent('DOTAShowTextTooltip', '#patreon_bonus_button_tooltip');
@@ -21,7 +15,6 @@ SubscribeToNetTableKey('game_state', 'patreon_bonuses', function(patreonBonuses)
 
 	isPatreon = playerBonuses.level > 0;
 	$('#PatreonBonusButton').enabled = isPatreon;
-	$('#PatreonBonusButton').checked = isPatreon && playerBonuses.bootsEnabled;
 });
 
 SubscribeToNetTableKey('game_state', 'patreon_bonuses', function(patreonBonuses) {

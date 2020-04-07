@@ -138,7 +138,6 @@
 		
 		"DOTA_Tooltip_modifier_silencer_new_int_steal"					"所窃取智力"
 		"DOTA_Tooltip_modifier_silencer_new_int_steal_Description"		"沉默术士在完成击杀或者辅助击杀后会偷取目标智力."
-		"DOTA_Tooltip_ability_special_bonus_unique_silencer_2"			"+1 智力窃取"
 
 		"DOTA_Tooltip_modifier_troll_feed_token_couter"					"不良玩家恶意送人头计数代币"
 		"DOTA_Tooltip_modifier_troll_debuff_stop_feed"					"送人头惩罚"
@@ -165,7 +164,9 @@
 		"DOTA_Tooltip_ability_item_mute_custom_Description"				"<h1>使用: 屏蔽玩家</h1> 屏蔽玩家” 施放于你先屏蔽的玩家身上。你也可以选择在积分榜中点击音量按钮来屏蔽玩家。"
 		"DOTA_Tooltip_ability_item_mute_custom_Lore"							"沉默是金"
 
-		"fast_buy_items"					                            "快速购买"
+		"fast_buy_items"                            "还不能购买"
+        "you_can_buy_only_one_item"                    "你只能购买一个该类型的物品"
+        "you_cannot_buy_more_items_this_type"        "你不能购买更多该类型的物品"
 
 		"allcouriersdie"					                            "所有信使已死亡"
 

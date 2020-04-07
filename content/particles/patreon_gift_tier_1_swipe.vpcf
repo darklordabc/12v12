@@ -1,0 +1,121 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf26:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 100
+	m_BoundingBoxMin = [ -16384.0, -16384.0, -16384.0 ]
+	m_BoundingBoxMax = [ 16384.0, 16384.0, 16384.0 ]
+	m_flCullRadius = -1.0
+	m_flConstantRadius = 7.0
+	m_ConstantColor = [ 92, 163, 229, 255 ]
+	m_bShouldSort = false
+	m_bScreenSpaceEffect = true
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_bAdditive = true
+			m_flOverbrightFactor = 10.0
+			m_hTexture = resource:"materials/particle/yellowflare2.vtex"
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_VectorNoise"
+			m_vecOutputMin = [ 1.0, 1.0, 0.0 ]
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_BasicMovement"
+			m_fDrag = 0.24
+		},
+		{
+			_class = "C_OP_Noise"
+			m_bAdditive = true
+			m_flOutputMax = 320.0
+			m_flOutputMin = -320.0
+			m_nFieldOutput = "4"
+			m_fl4NoiseScale = 0.02
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flBias = 0.25
+			m_flEndScale = 0.0
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.1
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 20.0
+			m_flRadiusMax = 20.0
+		},
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMax = 1.35
+			m_fLifetimeMin = 1.0
+		},
+		{
+			_class = "C_INIT_CreateWithinSphere"
+			m_LocalCoordinateSystemSpeedMax = [ 650.0, 0.0, 0.0 ]
+			m_LocalCoordinateSystemSpeedMin = [ 650.0, 0.0, 0.0 ]
+			m_vecDistanceBias = [ 1.0, 1.0, 0.0 ]
+		},
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMax = [ 18.0, -6.0, 0.0 ]
+			m_OffsetMin = [ 18.0, -6.0, 0.0 ]
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.15
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.0
+			}
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 4
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ null, null, null ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+}
