@@ -92,12 +92,11 @@ function setPaymentWindowVisible(visible) {
 	GameEvents.SendCustomGameEventToServer('patreon:payments:window', { visible: visible });
 	$('#PaymentWindow').visible = visible;
 	$('#SupportButtonPaymentWindow').checked = visible;
-	$('#PaymentConfirmationContainer').visible = visible;
-	lastConfirmedDonationTarget = Game.GetLocalPlayerID();
 	if (visible) {
 		updatePaymentWindow();
 		donation_target_dropdown.enabled = true;
 	} else {
+		$('#PaymentConfirmationContainer').visible = visible;
 		donation_target_dropdown.enabled = false;
 	}
 }
@@ -382,6 +381,9 @@ function UpdatePaymentTargetList(patreonData) {
 function UpdatePaymentTarget(id) {
 	$('#PaymentWindowAvatar').steamid = Game.GetPlayerInfo(id).player_steamid;
 	paymentTargetID = id;
+	if (paymentTargetID == Game.GetLocalPlayerID()) {
+		lastConfirmedDonationTarget = Game.GetLocalPlayerID();
+	}
 }
 
 setInterval(updatePatreonButton, 1000);
