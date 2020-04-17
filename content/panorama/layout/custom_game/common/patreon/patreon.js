@@ -4,6 +4,11 @@ var patreonLevel = 0
 var patreonPerks = []
 var offPatreonButton  = true
 var offVOIconButton  = true
+var giftNotificationRemainingTime = 0;
+var giftNotificationScheduler = false;
+var paymentTargetID = Game.GetLocalPlayerID();
+var donation_target_dropdown = false;
+
 $( "#PatreonPerksContainer" ).RemoveAndDeleteChildren()
 
 class PatreonPerk {
@@ -125,7 +130,7 @@ function updatePaymentWindow() {
 		}
 	}
 
-	var requestData = { provider: provider, paymentKind: paymentKind };
+	var requestData = { provider: provider, paymentKind: paymentKind, paymentTargetID: paymentTargetID };
 	paymentWindowUpdateListener = createPaymentRequest(requestData, function(response) {
 		if (response.url != null) {
 			$('#PaymentWindowBody').SetURL(response.url);
@@ -245,6 +250,8 @@ new PatreonPerk( "supporter_perks_high", 2 )
 SetPatreonLevel( 0 )
 
 SubscribeToNetTableKey('game_state', 'patreon_bonuses', function (data) {
+	UpdatePaymentTargetList(data);
+
 	var status = data[Game.GetLocalPlayerID()];
 	if (!status) return;
 
@@ -316,9 +323,12 @@ function UpdatePaymentTargetList(patreonData) {
 		var dropdown_parent = $('#PaymentWindowUserSelectorContainer');
 		donation_target_dropdown = $.CreatePanel('DropDown', dropdown_parent, 'PaymentWindowDropDown');
 		var layout_string = '<root><DropDown style="margin-left: 5px;" oninputsubmit="updatePaymentWindow()" >';
+		var local_id = Game.GetLocalPlayerID();
+
+		layout_string += `<Label text="${Players.GetPlayerName(local_id)}" id="PatreonOption${local_id}" onmouseover="UpdatePaymentTarget(${local_id})" />`;
 
 		for(var id = 0; id <= 23; id++) {
-			if (Players.IsValidPlayerID(id)) {
+			if (Players.IsValidPlayerID(id) && id != local_id) {
 				if (!patreonData[id] || patreonData[id].level <= 0) {
 					layout_string += `<Label text="${Players.GetPlayerName(id)}" id="PatreonOption${id}" onmouseover="UpdatePaymentTarget(${id})" />`;
 				}
@@ -326,6 +336,9 @@ function UpdatePaymentTargetList(patreonData) {
 		}
 		layout_string = layout_string + '</DropDown></root>';
 		donation_target_dropdown.BLoadLayoutFromString(layout_string, false, true);
+
+		donation_target_dropdown.SetSelected("PatreonOption" + local_id);
+		UpdatePaymentTarget(local_id);
 	}
 }
 

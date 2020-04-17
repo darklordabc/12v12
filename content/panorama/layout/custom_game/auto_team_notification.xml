@@ -1,0 +1,36 @@
+<root>
+	<script>
+		function NotificationAddPatreon(){
+			let pID = Game.GetLocalPlayerID()
+			let patreonBonuses = CustomNetTables.GetTableValue("game_state", "patreon_bonuses");
+			let bfreeSupport = patreonBonuses && patreonBonuses[pID]
+			if (bfreeSupport){
+				bfreeSupport = bfreeSupport['bfreeSupport']
+			}   
+			bfreeSupport = !!bfreeSupport &&  Game.GetState() == DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME
+			$('#notification').SetHasClass('Visible', !!bfreeSupport)
+			if (!!bfreeSupport){
+				Game.EmitSound( "DOTA_Item.IronTalon.Activate" )
+				$.Schedule(5,() => {
+					$('#notification').RemoveClass('Visible')
+				})
+			} 
+		}
+
+
+
+		(function(){ 
+			NotificationAddPatreon();
+			GameEvents.Subscribe('debug_free_patreon', NotificationAddPatreon);
+		})();
+	</script>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/auto_team_notification.css" />
+	</styles>
+	<Panel hittest="false" class="hud">
+		<Panel id="notification">
+			<Label text="#auto_team_add_patreon"/>
+		</Panel>
+	</Panel>
+</root>

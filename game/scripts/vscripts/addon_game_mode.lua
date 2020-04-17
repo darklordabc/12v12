@@ -2226,8 +2226,8 @@ SelectVO = function(keys)
 				"medusa_medus_kill_09",
 				"medusa_medus_failure_01",
 				"medusa_medus_deny_12",
-				"medusa_medus_illus_02",
 				"medusa_medus_begin_03",
+				"medusa_medus_illus_02",
 				},
 				{
 				"meepo_meepo_deny_16",

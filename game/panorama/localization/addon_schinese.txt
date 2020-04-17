@@ -10,6 +10,7 @@
 		"smart_random_button"							"智能随机"
 		"smart_random_tooltip_ready"					"从你最常用的英雄中随机选择一个"
 		"smart_random_tooltip_cooldown"					"每24小时只能使用一次，向乱战先锋2.0捐助可以移除这个限制！"
+		"smart_random_tooltip_no_stats"                    "你需要游玩至少3局才能使用该功能"
 
 		"player_stats_title"							"你的数据 {s:map_name}"
 		"player_stats_wins_loses"						"赢场/输场： "
