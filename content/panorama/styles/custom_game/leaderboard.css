@@ -69,7 +69,11 @@
 
 #Player {
     width: fill-parent-flow(1.0);
+}
+
+.playerInfo {
     flow-children: right;
+    horizontal-align: left;
 }
 
 #playerAvatar {

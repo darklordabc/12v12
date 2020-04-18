@@ -15,8 +15,10 @@
             <Panel class="TableRecord">
                 <Label id="Rank" />
                 <Panel id="Player">
-                    <DOTAAvatarImage id="playerAvatar" />
-                    <DOTAUserName id="playerUserName" />
+                    <Panel class="playerInfo">
+                        <DOTAAvatarImage id="playerAvatar" />
+                        <DOTAUserName id="playerUserName" />
+                    </Panel>
                 </Panel>
                 <Label id="Rating" />
             </Panel>
@@ -25,7 +27,7 @@
 
     <Panel class="BackgroundPanel Leaderboard">
         <Panel class="BackgroundPanelHeader">
-            <Label text="Leaderboard"/>       
+            <Label text="Leaderboard"/>
             <Button id="Close" class="CloseButton" onactivate="onClose()">
                 <Image src="s2r://panorama/images/control_icons/x_close_png.vtex" />
             </Button>
