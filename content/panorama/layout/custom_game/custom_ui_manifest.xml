@@ -57,5 +57,6 @@
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/common/voting_to_kick/voting_to_kick.xml" />
 
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/auto_team_notification.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/leaderboard.xml" />
 	</Panel>
 </root>

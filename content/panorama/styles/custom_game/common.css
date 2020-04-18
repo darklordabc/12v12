@@ -1,0 +1,27 @@
+.BackgroundPanel {
+    background-color: gradient( linear, 0% 0%, 0% 25%, from( #232326 ), to( #1c1d20 ) );
+    box-shadow: #00000099 -4px -4px 8px 8px;
+    border: 2px solid #32383677;
+}
+
+.BackgroundPanelHeader {
+    width: 100%;
+    height: 32px;
+
+    background-color: #00000077;
+    padding: 0px 8px;
+}
+
+.BackgroundPanelHeader Label {
+    color: #cccccc;
+    font-size: 20px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+.BackgroundPanelBody {
+    width: 100%;
+    height: fill-parent-flow(1.0);
+
+    padding: 0 38px;
+}
