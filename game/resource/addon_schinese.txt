@@ -35,6 +35,14 @@
 		"kick_troll"												"踢巨魔"
 		"kick_troll_description"									"踢巨魔！ 有权访问拖钓的踢出盟友（警告：该特权会从发现正在滥用的支持者中移除）"
 
+		"local_lobby_warning"										"警告：在本地大厅中游玩时，你将不能使用支持者优势，同时也无法付款。"
+		"local_lobby_confirm"										"好的"
+		"alipay_loading_warning"									"本页面可能需要15秒才能加载完毕。请稍等..."
+		"purchase_confirmation_header"								"你正在为他人购买支持者优势："
+		"purchase_confirmation_footer"								"确定吗？"
+		"purchase_confirmation_yes"									"是的，没错"
+		"purchase_confirmation_no"									"不，我要修改一下"
+
 		"high_tier_supporter_perk"									"仅限高级支持者（200¥）功能"
 		"available_perk"											"可用的"
 
