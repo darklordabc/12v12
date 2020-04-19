@@ -1,12 +1,11 @@
 <root>
     <styles>
         <include src="file://{resources}/styles/dotastyles.css" />
-        <include src="file://{resources}/styles/custom_game/common.css" />
         <include src="file://{resources}/styles/custom_game/leaderboard.css" />
     </styles>
 
     <scripts>
-        <include src="file://{resources}/scripts/custom_game/common.js" />
+        <include src="file://{resources}/layout/custom_game/common/utils.js" />
         <include src="file://{resources}/scripts/custom_game/leaderboard.js" />
     </scripts>
 
@@ -25,23 +24,25 @@
         </snippet>
     </snippets>
 
-    <Panel class="BackgroundPanel Leaderboard">
-        <Panel class="BackgroundPanelHeader">
-            <Label text="Leaderboard"/>
-            <Button id="Close" class="CloseButton" onactivate="onClose()">
-                <Image src="s2r://panorama/images/control_icons/x_close_png.vtex" />
-            </Button>
-        </Panel>
-        <Panel class="BackgroundPanelBody">
-            <Panel class="table">
-                <Panel id="TableHeader">
-                    <Panel class="TableRecord">
-                        <Label text="Rank" id="Rank" />
-                        <Label text="Player" id="Player" />
-                        <Label text="Rating" id="Rating" />
+    <Panel hittest="false" class="Background">
+        <Panel class="BackgroundPanel Leaderboard" id="Leaderboard">
+            <Panel class="BackgroundPanelHeader">
+                <Label text="#leaderboard"/>
+                <Button id="Close" class="CloseButton" onactivate="onClose()">
+                    <Image src="s2r://panorama/images/control_icons/x_close_png.vtex" />
+                </Button>
+            </Panel>
+            <Panel class="BackgroundPanelBody">
+                <Panel class="table">
+                    <Panel id="TableHeader">
+                        <Panel class="TableRecord">
+                            <Label text="#leaderboard_rank" id="Rank" />
+                            <Label text="#leaderboard_player" id="Player" />
+                            <Label text="#leaderboard_rating" id="Rating" />
+                        </Panel>
                     </Panel>
+                    <Panel id="TableBody" />
                 </Panel>
-                <Panel id="TableBody" />
             </Panel>
         </Panel>
     </Panel>

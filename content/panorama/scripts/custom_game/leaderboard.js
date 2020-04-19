@@ -1,10 +1,14 @@
 "use strict";
 
-let onClose = () => {
-    $.GetContextPanel().visible = false;
+function getLeaderboard() {
+    return $.GetContextPanel().FindChildTraverse('Leaderboard');
 }
 
-let getTableRecord = (record, parent, id) => {
+function onClose() {
+    getLeaderboard().visible = false;
+}
+
+function getTableRecord(record, parent, id) {
     let panel = $.CreatePanel('Panel', parent, id);
     panel.BLoadLayoutSnippet('TableRecord');
 
@@ -16,7 +20,7 @@ let getTableRecord = (record, parent, id) => {
     return panel;
 }
 
-let updateTable = (players) => {
+function updateTable(players) {
     let body = $.GetContextPanel().FindChildTraverse('TableBody');
     body.RemoveAndDeleteChildren();
 
@@ -25,26 +29,38 @@ let updateTable = (players) => {
     });
 }
 
-let addMenuButton = () => {
+
+function attachMenuButton(panel) {
+    let menu = GetDotaHud().FindChildTraverse('MenuButtons').FindChildTraverse('ButtonBar');
+    let existingPanel = menu.FindChildTraverse(panel.id);
+
+    if (existingPanel)
+        existingPanel.DeleteAsync(0.1);
+
+    panel.SetParent(menu);
+}
+
+function addMenuButton() {
     let button = $.CreatePanel('Button', $.GetContextPanel(), 'OpenLeaderboard');
     button.SetPanelEvent('onactivate', () => {
-        let panel = $.GetContextPanel();
+        let panel = getLeaderboard();
         panel.visible = !panel.visible;
     });
 
-    $.Utils.AttachMenuButton(button);
+    attachMenuButton(button);
 }
 
 (function () {
-    let players = [];
-    for (let i = 0; i < 100; i++)
-        players.push({
-            rank: 20,
-            steamId: 76561197988355984,
-            rating: 1000
-        });
-
+    getLeaderboard().visible = false;
     addMenuButton();
-    updateTable(players);
-    $.GetContextPanel().visible = false;
+
+    SubscribeToNetTableKey('game_state', 'leaderboard', (leaderboardObj) => {
+        let leaderboard = Object.values(leaderboardObj);
+        if (leaderboard.length == 0)
+            return;
+
+        leaderboard.forEach((r, i) => r.rank = i + 1);
+
+        updateTable(leaderboard);
+    })
 })();
