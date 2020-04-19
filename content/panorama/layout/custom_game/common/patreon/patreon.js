@@ -7,6 +7,7 @@ var offVOIconButton  = true
 var giftNotificationRemainingTime = 0;
 var giftNotificationScheduler = false;
 var paymentTargetID = Game.GetLocalPlayerID();
+var lastConfirmedDonationTarget = Game.GetLocalPlayerID();
 var donation_target_dropdown = false;
 
 $( "#PatreonPerksContainer" ).RemoveAndDeleteChildren()
@@ -42,6 +43,16 @@ class PatreonPerk {
 		}
 	}
 }
+
+GameEvents.Subscribe('is_local_server', function() {
+	$('#LocalServerWarningContainer').style.visibility = 'visible';
+	$('#LocalServerWarningContainer').style.opacity = '1.0';
+});
+
+function CloseLocalServerWarning() {
+	$('#LocalServerWarningContainer').style.visibility = 'collapse';
+}
+
 function Divider() {
 	let panel = $.CreatePanel( "Panel", $( "#PatreonPerksContainer" ), "" )
 	panel.AddClass( "Divider" )
@@ -83,6 +94,10 @@ function setPaymentWindowVisible(visible) {
 	$('#SupportButtonPaymentWindow').checked = visible;
 	if (visible) {
 		updatePaymentWindow();
+		donation_target_dropdown.enabled = true;
+	} else {
+		$('#PaymentConfirmationContainer').visible = visible;
+		donation_target_dropdown.enabled = false;
 	}
 }
 
@@ -101,11 +116,32 @@ function togglePaymentWindowVisible() {
 	setPaymentWindowVisible(!$('#PaymentWindow').visible);
 }
 
+function ShowPaymentConfirmationWindow() {
+	$('#PaymentConfirmationAvatar').steamid = Game.GetPlayerInfo(paymentTargetID).player_steamid;
+	$('#PaymentConfirmationAvatarLabel').text = Players.GetPlayerName(paymentTargetID);
+	$('#PaymentConfirmationContainer').style.visibility = 'visible';
+}
+
+function ConfirmPaymentTarget() {
+	$('#PaymentConfirmationContainer').style.visibility = 'collapse';
+	lastConfirmedDonationTarget = paymentTargetID;
+	updatePaymentWindow()
+}
+
+function ResetPaymentTarget() {
+	$('#PaymentConfirmationContainer').style.visibility = 'collapse';
+}
+
 var createPaymentRequest = createEventRequestCreator('patreon:payments:create');
 
 var paymentWindowUpdateListener;
 var paymentWindowPostUpdateTimer;
 function updatePaymentWindow() {
+	if (paymentTargetID != lastConfirmedDonationTarget && paymentTargetID != Game.GetLocalPlayerID()) {
+		ShowPaymentConfirmationWindow();
+		return;
+	}
+
 	if (paymentWindowUpdateListener != null) {
 		GameEvents.Unsubscribe(paymentWindowUpdateListener);
 	}
@@ -345,6 +381,9 @@ function UpdatePaymentTargetList(patreonData) {
 function UpdatePaymentTarget(id) {
 	$('#PaymentWindowAvatar').steamid = Game.GetPlayerInfo(id).player_steamid;
 	paymentTargetID = id;
+	if (paymentTargetID == Game.GetLocalPlayerID()) {
+		lastConfirmedDonationTarget = Game.GetLocalPlayerID();
+	}
 }
 
 setInterval(updatePatreonButton, 1000);

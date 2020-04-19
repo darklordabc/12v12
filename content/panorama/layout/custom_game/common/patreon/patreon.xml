@@ -25,6 +25,29 @@
 	</snippets>
 
  	<Panel hittest="false" class="PatreonRoot">
+ 		<Panel id="LocalServerWarningContainer" >
+ 			<Label id="LocalServerWarningLabel" text="#local_lobby_warning" />
+ 			<Button id="LocalServerWarningButton" onactivate='CloseLocalServerWarning()' >
+ 				<Label id="LocalServerWarningButtonLabel" text="#local_lobby_confirm" />
+ 			</Button>
+ 		</Panel>
+
+ 		<Panel id="PaymentConfirmationContainer" >
+ 			<Label id="PaymentConfirmationHeader" text="#purchase_confirmation_header" />
+ 			<DOTAAvatarImage id="PaymentConfirmationAvatar" steamid="local" />
+ 			<Label id="PaymentConfirmationAvatarLabel" text="Firetoad" />
+ 			<Label id="PaymentConfirmationFooter" text="#purchase_confirmation_footer" />
+ 			<Panel id="PaymentConfirmationButtonsContainer" >
+ 				<Button id="PaymentConfirmationButtonYes" onactivate='ConfirmPaymentTarget()' >
+	 				<Label id="PaymentConfirmationLabelYes" text="#purchase_confirmation_yes" />
+	 			</Button>
+
+	 			<Button id="PaymentConfirmationButtonNo" onactivate='ResetPaymentTarget()' >
+	 				<Label id="PaymentConfirmationLabelNo" text="#purchase_confirmation_no" />
+	 			</Button>
+ 			</Panel>
+ 		</Panel>
+
  		<Panel id="PatreonButtonPanel">
 			<!--<Image src="file://{resources}/layout/custom_game/common/patreon/perks/unlimited_chat_wheel.png" />-->
 			<Image id="VOIcon" src="file://{resources}/layout/custom_game/common/patreon/voicon.png" onmouseover='ShowVOIconButton()' onmouseout='HideVOIconButton()'/>
@@ -95,7 +118,10 @@
 
 				<HTML id="PaymentWindowBody" acceptsinput="true" />
 				<Panel id="PaymentWindowLoader">
-					<Panel class="Spinner" />
+					<Panel id="spinner_container" >
+						<Panel id="loading_spinner" class="Spinner" />
+						<Label id="alipay_loading_warning" text="#alipay_loading_warning" />
+					</Panel>
 				</Panel>
 				<Panel id="PaymentWindowError">
 					<Label id="PaymentWindowErrorMessage" />
