@@ -15,8 +15,8 @@
                 <Label id="Rank" />
                 <Panel id="Player">
                     <Panel class="playerInfo">
-                        <DOTAAvatarImage id="playerAvatar" />
-                        <DOTAUserName id="playerUserName" />
+                        <DOTAAvatarImage id="PlayerAvatar" />
+                        <DOTAUserName id="PlayerUserName" />
                     </Panel>
                 </Panel>
                 <Label id="Rating" />

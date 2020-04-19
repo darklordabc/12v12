@@ -1,11 +1,7 @@
 "use strict";
 
-function getLeaderboard() {
-    return $.GetContextPanel().FindChildTraverse('Leaderboard');
-}
-
 function onClose() {
-    getLeaderboard().visible = false;
+    $('#Leaderboard').visible = false;
 }
 
 function getTableRecord(record, parent, id) {
@@ -13,8 +9,8 @@ function getTableRecord(record, parent, id) {
     panel.BLoadLayoutSnippet('TableRecord');
 
     panel.FindChildTraverse('Rank').text = record.rank;
-    panel.FindChildTraverse('playerAvatar').steamid = record.steamId;
-    panel.FindChildTraverse('playerUserName').steamid = record.steamId;
+    panel.FindChildTraverse('PlayerAvatar').steamid = record.steamId;
+    panel.FindChildTraverse('PlayerUserName').steamid = record.steamId;
     panel.FindChildTraverse('Rating').text = record.rating;
 
     return panel;
@@ -25,7 +21,7 @@ function updateTable(players) {
     body.RemoveAndDeleteChildren();
 
     players.forEach((player, i) => {
-        getTableRecord(player, body, `player_${i}`);
+        getTableRecord(player, body);
     });
 }
 
@@ -43,7 +39,7 @@ function attachMenuButton(panel) {
 function addMenuButton() {
     let button = $.CreatePanel('Button', $.GetContextPanel(), 'OpenLeaderboard');
     button.SetPanelEvent('onactivate', () => {
-        let panel = getLeaderboard();
+        let panel = $('#Leaderboard');
         panel.visible = !panel.visible;
     });
 
@@ -51,7 +47,7 @@ function addMenuButton() {
 }
 
 (function () {
-    getLeaderboard().visible = false;
+    $('#Leaderboard').visible = false;
     addMenuButton();
 
     SubscribeToNetTableKey('game_state', 'leaderboard', (leaderboardObj) => {
