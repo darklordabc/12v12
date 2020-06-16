@@ -1,0 +1,42 @@
+#ChangeTeamPanel{
+	flow-children: right;
+	transition: transform 0.5s ease-in-out 0s;
+	margin-top: 115px;
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #425663cc ), color-stop( .5, #42566355 ), to( #0000 ) );
+	padding: 4px;
+	padding-left: 6px;
+	transform: translatex(-500px);
+}
+#ChangeTeamPanel.show{
+	transform: translatex(0px);
+}
+#ChangeTeamIcon{
+	width: 23px;
+	height: 23px;
+	wash-color: #9fafc6;
+	transition: transform 0.5s ease-in-out 0s, wash-color 0.2s ease-in-out 0s;
+}
+#ChangeTeamTextWrap{
+	vertical-align: center;
+	padding-top: 2px;
+	margin-left: 7px;
+}
+#ChangeTeamText{
+	font-size: 17px;
+	color: #8897ad;
+	text-shadow: 1px 1px 1px 2 rgba(0, 0, 0, 0.4);
+	font-weight: thin;
+	transition: color 0.2s ease-in-out 0s;
+}
+#ChangeTeamPanel:hover Label{
+	color: #9fafc6;
+}
+#ChangeTeamPanel:hover Image{
+	transform: rotateZ(-180deg);
+}
+#ChangeTeamPanel:active Label{
+	color: #d6e8ff;
+}
+#ChangeTeamPanel:active Image{
+	wash-color: #d6e8ff;
+}

@@ -103,6 +103,9 @@
 			<Panel id="AssistsContainer" class="ScoreCol_Assists ScoreboardPanel">
 				<Label id="Assists" text="999" />
 			</Panel>
+			<Panel id="NeutralItemWrap" class="ScoreboardPanel">
+				<DOTAItemImage id="NeutralItem"/>
+			</Panel>
 		</Panel>
 		<Panel id="UltimateIndicatorBG" class="UltimateIndicatorShared" />
 		<Panel id="UltimateIndicator" class="UltimateIndicatorShared" />

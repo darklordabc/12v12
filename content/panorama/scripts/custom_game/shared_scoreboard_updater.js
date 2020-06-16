@@ -207,7 +207,15 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Kills", playerInfo.player_kills );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Deaths", playerInfo.player_deaths );
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Assists", playerInfo.player_assists );
+		HighlightByParty(playerId, playerPanel.FindChildInLayoutFile("PlayerName"));
 
+		const heroEntIndex = Players.GetPlayerHeroEntityIndex(playerId);
+		const neutralItem = Entities.GetItemInSlot(heroEntIndex, 16);
+		if (neutralItem) {
+			const neutralItemName = Abilities.GetAbilityName(neutralItem);
+			playerPanel.FindChildInLayoutFile("NeutralItem").itemname = neutralItemName;
+		}
+		
 		var playerPortrait = playerPanel.FindChildInLayoutFile( "HeroIcon" );
 		if ( playerPortrait )
 		{

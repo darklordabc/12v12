@@ -24,6 +24,14 @@ local TROLL_FEED_SYSTEM_ASSISTS_TO_KILL_MULTI = 0.5 -- 10 assists = 5 "kills"
 --Requirements to Buy Divine Rapier
 local NET_WORSE_FOR_RAPIER_MIN = 20000
 
+--Change team system
+local ts_entities = LoadKeyValues('scripts/kv/ts_entities.kv')
+local COOLDOWN_FOR_CHANGE_TEAM = (60*3) -- 3 minutes
+local MIN_DIFFERNCE_PLAYERS_IN_TEAM = 2 -- Player can change team if they're playing 10vs12, not 11vs12
+
+--Max neutral items for each player (hero/stash/courier)
+_G.MAX_NEUTRAL_ITEMS_FOR_PLAYER = 3
+
 require("common/init")
 require("util")
 require("neutral_items_drop_choice")
@@ -278,7 +286,48 @@ function ItWorstKD(unit) -- use minimun TROLL_FEED_RATIO_KD_TO_TRIGGER_MIN
 	end
 	return true
 end
-
+function CMegaDotaGameMode:SetTeamColors()
+	local ggp = 0
+	local bgp = 0
+	local ggcolor = {
+		{70,70,255},
+		{0,255,255},
+		{255,0,255},
+		{255,255,0},
+		{255,165,0},
+		{0,255,0},
+		{255,0,0},
+		{75,0,130},
+		{109,49,19},
+		{255,20,147},
+		{128,128,0},
+		{255,255,255}
+	}
+	local bgcolor = {
+		{255,135,195},
+		{160,180,70},
+		{100,220,250},
+		{0,128,0},
+		{165,105,0},
+		{153,50,204},
+		{0,128,128},
+		{0,0,165},
+		{128,0,0},
+		{180,255,180},
+		{255,127,80},
+		{0,0,0}
+	}
+	for i=0, PlayerResource:GetPlayerCount()-1 do
+		if PlayerResource:GetTeam(i) == DOTA_TEAM_GOODGUYS then
+			ggp = ggp + 1
+			PlayerResource:SetCustomPlayerColor(i,ggcolor[ggp][1],ggcolor[ggp][2],ggcolor[ggp][3])
+		end
+		if PlayerResource:GetTeam(i) == DOTA_TEAM_BADGUYS then
+			bgp = bgp + 1
+			PlayerResource:SetCustomPlayerColor(i,bgcolor[bgp][1],bgcolor[bgp][2],bgcolor[bgp][3])
+		end
+	end
+end
 function CMegaDotaGameMode:OnHeroPicked(event)
 	local hero = EntIndexToHScript(event.heroindex)
 	if not hero then return end
@@ -367,9 +416,9 @@ function CMegaDotaGameMode:OnEntityKilled( event )
 	end
 	if killedUnit:IsClone() then killedUnit = killedUnit:GetCloneSource() end
 	--print("fired")
-    if killedUnit and killedUnit:IsRealHero() and not killedUnit:IsReincarnating() then
+    if killer and killedUnit and killedUnit:IsRealHero() and not killedUnit:IsReincarnating() then
 		local player_id = -1
-		if killer and killer:IsRealHero() and killer.GetPlayerID then
+		if killer:IsRealHero() and killer.GetPlayerID then
 			player_id = killer:GetPlayerID()
 		else
 			if killer:GetPlayerOwnerID() ~= -1 then
@@ -455,7 +504,7 @@ function CMegaDotaGameMode:OnNPCSpawned(event)
 	local tokenTrollCouter = "modifier_troll_feed_token_couter"
 
 	-- Assignment of tokens during quick death, maximum 3
-	if (_G.lastDeathTimes[spawnedUnit] ~= nil) and (spawnedUnit:GetDeaths() > 1) and ((GameRules:GetGameTime() - _G.lastDeathTimes[spawnedUnit]) < TROLL_FEED_TOKEN_TIME_DIES_WITHIN) and not spawnedUnit:HasModifier("modifier_troll_debuff_stop_feed") and (_G.lastHeroKillers[spawnedUnit]~=spawnedUnit) and (not (UnitInSafeZone(spawnedUnit, _G.lastHerosPlaceLastDeath[spawnedUnit]))) and (_G.lastHeroKillers[spawnedUnit]:GetTeamNumber()~=DOTA_TEAM_NEUTRALS) then
+	if spawnedUnit and (_G.lastDeathTimes[spawnedUnit] ~= nil) and (spawnedUnit:GetDeaths() > 1) and ((GameRules:GetGameTime() - _G.lastDeathTimes[spawnedUnit]) < TROLL_FEED_TOKEN_TIME_DIES_WITHIN) and not spawnedUnit:HasModifier("modifier_troll_debuff_stop_feed") and (_G.lastHeroKillers[spawnedUnit]~=spawnedUnit) and (not (UnitInSafeZone(spawnedUnit, _G.lastHerosPlaceLastDeath[spawnedUnit]))) and (_G.lastHeroKillers[spawnedUnit]:GetTeamNumber()~=DOTA_TEAM_NEUTRALS) then
 		local maxToken = TROLL_FEED_NEED_TOKEN_TO_BUFF
 		local currentStackTokenCouter = spawnedUnit:GetModifierStackCount(tokenTrollCouter, spawnedUnit)
 		local needToken = currentStackTokenCouter + 1
@@ -719,61 +768,33 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 	end
 
 	if newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
-		local ggp = 0
-		local bgp = 0
-		local ggcolor = {
-			{70,70,255},
-			{0,255,255},
-			{255,0,255},
-			{255,255,0},
-			{255,165,0},
-			{0,255,0},
-			{255,0,0},
-			{75,0,130},
-			{109,49,19},
-			{255,20,147},
-			{128,128,0},
-			{255,255,255}
-		}
-		local bgcolor = {
-			{255,135,195},
-			{160,180,70},
-			{100,220,250},
-			{0,128,0},
-			{165,105,0},
-			{153,50,204},
-			{0,128,128},
-			{0,0,165},
-			{128,0,0},
-			{180,255,180},
-			{255,127,80},
-			{0,0,0}
-		}
-		for i=0, PlayerResource:GetPlayerCount()-1 do
-			if PlayerResource:GetTeam(i) == DOTA_TEAM_GOODGUYS then
-				ggp = ggp + 1
-				PlayerResource:SetCustomPlayerColor(i,ggcolor[ggp][1],ggcolor[ggp][2],ggcolor[ggp][3])
-			end
-			if PlayerResource:GetTeam(i) == DOTA_TEAM_BADGUYS then
-				bgp = bgp + 1
-				PlayerResource:SetCustomPlayerColor(i,bgcolor[bgp][1],bgcolor[bgp][2],bgcolor[bgp][3])
+		self:SetTeamColors()
+		for i=0, DOTA_MAX_TEAM_PLAYERS do
+			if PlayerResource:IsValidPlayer(i) then
+				if PlayerResource:HasSelectedHero(i) == false then
+					local player = PlayerResource:GetPlayer(i)
+					player:MakeRandomHeroSelection()
+				end
 			end
 		end
-
-        for i=0, DOTA_MAX_TEAM_PLAYERS do
-            if PlayerResource:IsValidPlayer(i) then
-                if PlayerResource:HasSelectedHero(i) == false then
-
-                    local player = PlayerResource:GetPlayer(i)
-                    player:MakeRandomHeroSelection()
-
-                    local hero_name = PlayerResource:GetSelectedHeroName(i)
-                end
-            end
-        end
 	end
 
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+		
+		local parties = {}
+		-- Set up player colors
+		for id = 0, 23 do
+			if PlayerResource:IsValidPlayer(id) then
+				local party_id = tonumber(tostring(PlayerResource:GetPartyID(id)))
+				if party_id and party_id > 0 then
+					parties[id] = party_id
+				end
+			end
+		end
+		if parties then
+			CustomNetTables:SetTableValue("game_state", "parties", parties)
+		end
+		
 		if not IsDedicatedServer() then
 			Timers:CreateTimer(3, function()
 				CustomGameEventManager:Send_ServerToAllClients("is_local_server", {})
@@ -847,6 +868,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 	end
 
 	if newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		CheckTeamBalance()
 		if game_start then
 			game_start = false
 			Timers:CreateTimer(0.1, function()
@@ -1074,10 +1096,15 @@ function CMegaDotaGameMode:OnConnectFull(data)
 		SendToServerConsole('kickid '.. data.userid);
 	end
 	CustomGameEventManager:Send_ServerToAllClients( "change_leave_status", {leave = false, playerId = data.PlayerID} )
+	CheckTeamBalance()
 end
 
 function CMegaDotaGameMode:OnPlayerDisconnect(data)
 	CustomGameEventManager:Send_ServerToAllClients( "change_leave_status", {leave = true, playerId = data.PlayerID} )
+	CheckTeamBalance()
+	Timers:CreateTimer(310, function()
+		CheckTeamBalance()
+	end)
 end
 
 function GetBlockItemByID(id)
@@ -1090,6 +1117,7 @@ function GetBlockItemByID(id)
 end
 
 function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
+	for i,x in pairs(filterTable) do print(i,x) end
 	local orderType = filterTable.order_type
 	local playerId = filterTable.issuer_player_id_const
 	local target = filterTable.entindex_target ~= 0 and EntIndexToHScript(filterTable.entindex_target) or nil
@@ -1137,6 +1165,16 @@ function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
 		if target:GetClassname() == "ent_dota_shop" and ability:GetAbilityName() == "item_relic" then
 			Timers:RemoveTimer("seacrh_rapier_on_player"..ability:GetEntityIndex())
 		end
+
+		if _G.neutralItems[ability:GetAbilityName()] then
+			local targetID = target:GetPlayerOwnerID()
+			if targetID and targetID~=playerId then
+				if CheckCountOfNeutralItemsForPlayer(targetID) >= _G.MAX_NEUTRAL_ITEMS_FOR_PLAYER then
+					DisplayError(playerId, "#unit_still_have_a_lot_of_neutral_items")
+					return
+				end
+			end
+		end
 	end
 
 	if orderType == DOTA_UNIT_ORDER_PICKUP_ITEM then
@@ -1153,8 +1191,23 @@ function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
 				StartTimerHoldingCheckerForPlayer(playerId)
 			end
 		end
+		if _G.neutralItems[itemName] then
+			if CheckCountOfNeutralItemsForPlayer(playerId) >= _G.MAX_NEUTRAL_ITEMS_FOR_PLAYER then
+				DisplayError(playerId, "#player_still_have_a_lot_of_neutral_items")
+				return
+			end
+		end
 	end
-
+	
+	if orderType == 38 then
+		if _G.neutralItems[ability:GetAbilityName()] then
+			if CheckCountOfNeutralItemsForPlayer(playerId) >= _G.MAX_NEUTRAL_ITEMS_FOR_PLAYER then
+				DisplayError(playerId, "#player_still_have_a_lot_of_neutral_items")
+				return
+			end
+		end
+	end
+	
 	if orderType == DOTA_UNIT_ORDER_DROP_ITEM or orderType == DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH then
 		if ability and itemsToBeDestroy[ability:GetAbilityName()] then
 			ability:Destroy()
@@ -2900,3 +2953,159 @@ RegisterCustomEventListener("set_mute_player", function(data)
 		_G.tPlayersMuted[fromId][toId] = disable
 	end
 end)
+_G.changeTeamProgress = false
+_G.changeTeamTimes = {}
+
+function CheckTeamBalance()
+	local radiantPlayers = 0
+	local direPlayers = 0
+
+	for playerID = 0, 23 do
+		local state = PlayerResource:GetConnectionState(playerID)
+		if 
+			state ~= DOTA_CONNECTION_STATE_DISCONNECTED 
+			and (state == DOTA_CONNECTION_STATE_CONNECTED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED) 
+		then
+			local team = PlayerResource:GetTeam(playerID)
+			if team == DOTA_TEAM_GOODGUYS then
+				radiantPlayers = radiantPlayers + 1
+			elseif team == DOTA_TEAM_BADGUYS then
+				direPlayers = direPlayers + 1
+			end
+		end
+	end
+	if math.abs(radiantPlayers-direPlayers) > (MIN_DIFFERNCE_PLAYERS_IN_TEAM-1) then
+		local highTeam = DOTA_TEAM_GOODGUYS
+		if radiantPlayers < direPlayers then
+			highTeam = DOTA_TEAM_BADGUYS
+		end
+		Timers:CreateTimer(0.5, function()
+			CustomGameEventManager:Send_ServerToTeam(highTeam, "ShowTeamChangePanel", {} )
+		end)
+	else
+		CustomGameEventManager:Send_ServerToAllClients("HideTeamChangePanel", {} )
+	end
+	_G.changeTeamProgress = false
+end
+
+RegisterCustomEventListener("PlayerChangeTeam", function(data)
+	local oldTeam = PlayerResource:GetTeam(data.PlayerID)
+	local newTeam
+	if oldTeam == DOTA_TEAM_GOODGUYS then
+		newTeam = DOTA_TEAM_BADGUYS
+	else
+		newTeam = DOTA_TEAM_GOODGUYS
+	end
+	ChangeTeam(data.PlayerID, newTeam)
+end)
+
+function ChangeTeam(playerID, newTeam)
+	if _G.changeTeamProgress then return end
+	if _G.changeTeamTimes[playerID] and (GameRules:GetGameTime() - _G.changeTeamTimes[playerID]) < COOLDOWN_FOR_CHANGE_TEAM then
+		DisplayError(playerID, "Cooldown for change team")
+		return
+	end 
+	_G.changeTeamTimes[playerID] = GameRules:GetGameTime()
+	_G.changeTeamProgress = true
+	
+	CustomGameEventManager:Send_ServerToAllClients("HideTeamChangePanel", {} )
+	PlayerResource:SetCustomTeamAssignment(playerID, newTeam)
+	local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+
+	if IsValidEntity(hero) then
+		-- Change the team
+		hero:SetTeam(newTeam)
+
+		-- Kill the hero
+		hero:Kill(nil, hero)
+		--hero:SetGold(0, true)
+
+		if IsValidEntity(hero) then
+			-- Set the time left until we respawn
+			hero:SetTimeUntilRespawn(1)
+
+			-- Check if we have any meepo clones
+			if hero:HasAbility('arc_warden_tempest_double') then
+				local clones = Entities:FindAllByName(hero:GetClassname())
+
+				for _,tempestDouble in pairs(clones) do
+					if tempestDouble:IsTempestDouble() and playerID == tempestDouble:GetPlayerID() then
+						tempestDouble:Kill(nil, nil)
+					end
+				end
+			end
+
+			-- Check if we have any meepo clones
+			if hero:HasAbility('meepo_divided_we_stand') then
+				local clones = Entities:FindAllByName(hero:GetClassname())
+
+				for _,meepoClone in pairs(clones) do
+					if meepoClone:IsClone() and playerID == meepoClone:GetPlayerID() then
+						meepoClone:SetTimeUntilRespawn(1)
+					end
+				end
+			end
+			-- Check which units we should change team
+			for spell, name in pairs(ts_entities.Switch) do
+				if hero:HasAbility(spell) then
+					local units = Entities:FindAllByName(name)
+					if #units == 0 then
+						units = Entities:FindAllByModel(name)
+					end
+
+					for _, unit in pairs(units) do
+						print("found units")
+						if unit:GetPlayerOwnerID() == playerID then
+							unit:SetTeam(newTeam)
+						end
+					end
+				end
+			end
+			-- Check which units we should kill
+			for spell, name in pairs(ts_entities.Kill) do
+				if hero:HasAbility(spell) then
+					local units = Entities:FindAllByName(name)
+					if #units == 0 then
+						units = Entities:FindAllByModel(name)
+					end
+
+					for _, unit in pairs(units) do
+						if unit:GetPlayerOwnerID() == playerID then
+							unit:Kill(nil, nil)
+						end
+					end
+				end
+			end
+			-- Change team for courier and move it in new fountain area
+			local couriers = Entities:FindAllByName("npc_dota_courier")
+			for _, courier in pairs(couriers) do
+				if courier:GetPlayerOwnerID() == playerID then
+					local fountain
+					local vMoveFromFountain
+					if newTeam == DOTA_TEAM_GOODGUYS then
+						fountain = Entities:FindByName( nil, "ent_dota_fountain_good" )
+						vMoveFromFountain = Vector(500,500,0)
+					elseif newTeam == DOTA_TEAM_BADGUYS then
+						fountain = Entities:FindByName( nil, "ent_dota_fountain_bad" )
+						vMoveFromFountain = Vector(-500,-500,0)
+					end
+					local vFountainPoint = fountain:GetAbsOrigin()
+					local vNewCourierPount = vFountainPoint + vMoveFromFountain + RandomVector(150)
+					courier:SetTeam(newTeam)
+					FindClearSpaceForUnit(courier, vNewCourierPount, false)
+				end
+			end
+			
+			-- Recreate personal perk
+			hero:RemoveModifierByName(_G.PlayersPatreonsPerk[playerID])
+			Timers:CreateTimer(2, function()
+				hero:AddNewModifier(hero, nil, _G.PlayersPatreonsPerk[playerID], {duration = -1})
+			end)
+		end
+	end
+	
+	-- Check balance again
+	Timers:CreateTimer(3, function()
+		CheckTeamBalance()
+	end)
+end

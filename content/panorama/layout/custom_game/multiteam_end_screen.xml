@@ -5,8 +5,10 @@
     </styles>
 
     <scripts>
-         <include src="file://{resources}/scripts/custom_game/shared_scoreboard_updater.js" />
-       <include src="file://{resources}/scripts/custom_game/multiteam_end_screen.js" />
+		<include src="file://{resources}/layout/custom_game/common/utils.js" />
+		<include src="file://{resources}/layout/custom_game/common/party_highlighter.js" />
+		<include src="file://{resources}/scripts/custom_game/shared_scoreboard_updater.js" />
+		<include src="file://{resources}/scripts/custom_game/multiteam_end_screen.js" />
     </scripts>
 
 	<Panel hittest="false" class="EndScreenRoot">

@@ -86,12 +86,11 @@ function DisableHelp.ExecuteOrderFilter(orderType, ability, target, unit, orderV
 			DisplayError(caster_id, "dota_hud_error_target_has_disable_help")
 			return false
 		else
-			local checkRadiusForEnemy = 160 -- ~Sprout radius
 			local enemies = FindUnitsInRadius(
 				unit:GetTeam(),
 				orderVector,
 				nil,
-				checkRadiusForEnemy,
+				210,
 				DOTA_UNIT_TARGET_TEAM_ENEMY,
 				DOTA_UNIT_TARGET_HERO,
 				DOTA_UNIT_TARGET_FLAG_NONE,
@@ -103,7 +102,7 @@ function DisableHelp.ExecuteOrderFilter(orderType, ability, target, unit, orderV
 					unit:GetTeam(),
 					orderVector,
 					nil,
-					checkRadiusForEnemy,
+					160,
 					DOTA_UNIT_TARGET_TEAM_FRIENDLY,
 					DOTA_UNIT_TARGET_HERO,
 					DOTA_UNIT_TARGET_FLAG_NONE,

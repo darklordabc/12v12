@@ -56,5 +56,6 @@
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/common/patreon/game_perk/patreons_game_perk.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/common/voting_to_kick/voting_to_kick.xml" />
 		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/leaderboard.xml" />
+		<CustomUIElement type="Hud"					layoutfile="file://{resources}/layout/custom_game/common/change_team/change_team.xml" />
 	</Panel>
 </root>

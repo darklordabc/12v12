@@ -45,6 +45,33 @@ function DropItem(data)
 		return nil
 	end)
 end
+function CheckNeutralItemForUnit(unit)
+	local count = 0
+	for i = 0, 20 do
+		local item = unit:GetItemInSlot(i)
+		if item then
+			if _G.neutralItems[item:GetAbilityName()] then count = count + 1 end
+		end
+	end
+	return count
+end
+
+function CheckCountOfNeutralItemsForPlayer(playerId)
+	local hero = PlayerResource:GetSelectedHeroEntity(playerId)
+	local neutralItemsForPlayer = CheckNeutralItemForUnit(hero)
+	if neutralItemsForPlayer >= MAX_NEUTRAL_ITEMS_FOR_PLAYER then return neutralItemsForPlayer end
+	local playersCourier
+	local couriers = Entities:FindAllByName("npc_dota_courier")
+	for _, courier in pairs(couriers) do
+		if courier:GetPlayerOwnerID() == playerId then
+			playersCourier = courier
+		end
+	end
+	if playersCourier then
+		neutralItemsForPlayer = neutralItemsForPlayer + CheckNeutralItemForUnit(playersCourier)
+	end
+	return neutralItemsForPlayer
+end
 
 function NotificationToAllPlayerOnTeam(data)
 	for id = 0, 24 do
@@ -55,6 +82,11 @@ function NotificationToAllPlayerOnTeam(data)
 end
 
 RegisterCustomEventListener( "neutral_item_keep", function( data )
+	if CheckCountOfNeutralItemsForPlayer(data.PlayerID) >= _G.MAX_NEUTRAL_ITEMS_FOR_PLAYER then
+		DropItem(data)
+		DisplayError(data.PlayerID, "#player_still_have_a_lot_of_neutral_items")
+		return
+	end
 	local item = EntIndexToHScript( data.item )
 	local hero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
 	local freeSlot = DoesHeroHasFreeSlot(hero)
@@ -68,6 +100,10 @@ RegisterCustomEventListener( "neutral_item_keep", function( data )
 end )
 
 RegisterCustomEventListener( "neutral_item_take", function( data )
+	if CheckCountOfNeutralItemsForPlayer(data.PlayerID) >= MAX_NEUTRAL_ITEMS_FOR_PLAYER then
+		DisplayError(data.PlayerID, "#player_still_have_a_lot_of_neutral_items")
+		return
+	end
 	local item = EntIndexToHScript( data.item )
 	local hero = PlayerResource:GetSelectedHeroEntity( data.PlayerID )
 	local freeSlot = DoesHeroHasFreeSlot(hero)

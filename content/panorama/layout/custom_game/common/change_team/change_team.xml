@@ -1,0 +1,18 @@
+<root>
+	<styles>
+		<include src="file://{resources}/layout/custom_game/common/change_team/change_team.css" />
+	</styles>
+	
+	<scripts>
+		<include src="file://{resources}/layout/custom_game/common/change_team/change_team.js" />
+	</scripts>
+
+	<Panel class="ChangeTeamRoot">
+		<Button id="ChangeTeamPanel" onactivate="ChangeTeam()">
+			<Image id="ChangeTeamIcon" src="s2r://panorama/images/control_icons/refresh_psd.vtex"/>
+			<Panel id="ChangeTeamTextWrap">
+				<Label id="ChangeTeamText" text="Change Team"/>
+			</Panel>
+		</Button>
+	</Panel>
+</root>
