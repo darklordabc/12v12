@@ -20,20 +20,23 @@
     background-position: 50% 50%;
     background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
     background-color: rgba(0,0,0,0.4);
+	opacity: 0.6;
 }
 #PrevTip
 {
     vertical-align: center;
     width: 24px;
     height: 100%;
-    wash-color:white;
+    wash-color: #ffffff;
 	background-size: 20px 20px;
     horizontal-align:right;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
     background-image: url("s2r://panorama/images/control_icons/arrow_solid_left_png.vtex");
 	background-color: rgba(0,0,0,0.52);
+	opacity: 0.85;
 }
+
 #ActivateBotsInToolsModeRoot{
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #272d2e ), to( #131617 ) );
 	box-shadow: #868686a8 -2px -2px 4px 4px;
@@ -59,14 +62,11 @@
 #LoadingScreenTipsPanel {
     width: 600px;
     height: 125px;
-	margin-bottom: 60px;
-    margin-left: 150px;
+	margin-top: 75px;
+    margin-left: 5px;
     horizontal-align: left;
-	vertical-align: center;
     flow-children: right;
-	border: 2px solid #32383677;
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #272d2e ), to( #131617 ) );
-	box-shadow: #868686a8 -2px -2px 4px 4px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from(rgba(44, 60, 62, 0.27)), to(rgba(15, 17, 17, 0.38)) );
 }
 
 #LoadingScreenTipsPanel.darkened {
@@ -78,36 +78,26 @@
 	visibility:collapse;
 }
 
-#LoadingScreenTipsPanel Label {
-	height: 100%;
-	width: 69%;
-    margin: 6px;
-    color: #FFFFFF;
-    vertical-align: center;
-    font-size: 21px;
-    line-height: 21px;
-    text-overflow: shrink;
-}
-
-#LoadingScreenTipsPanel Image {
-    width: height-percentage(100%);
-    height: 100%;
-    margin: 4px;
-    border:1px solid #000000;
-    border-radius: 5px;
-}
-
 #LoadingTipImage {
-    width: 100px;
-    height: 125px;
+    width: 120px;
+    height: 120px;
     background-color: #000000;
-
-    border:1px solid #000000;
-    border-radius: 5px;
+	vertical-align: center;
+	margin-left: 3px;
+    border: 1px solid rgba(118, 132, 134, 0.35);
 }
 
 #LoadingTipText {
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 20px;
+	width: 100%;
+	color: #ececec;
+	vertical-align: center;
+	font-size: 18px;
+	line-height: 21px;
+	text-overflow: shrink;
+	text-align: center;
+	font-weight: lighter;
+}
+#LoadingTipTextWrap{
+	height: 100%;
+	width: 71%;
 }

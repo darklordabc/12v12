@@ -6,7 +6,31 @@
 	padding: 4px;
 	padding-left: 6px;
 	transform: translatex(-500px);
+	
+	animation-name: glow;
+	animation-duration: 1s;
+	animation-iteration-count: 20;
+	animation-timing-function: linear;
 }
+
+@keyframes 'glow' {
+	0% {
+		box-shadow: 0 0 2px  rgba(255, 255, 255, 0.6);
+	}
+	25% {
+		box-shadow: 0 0 5px  rgba(255, 255, 255, 0.6);
+	}
+	50% {
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+	}
+	75% {
+		box-shadow: 0 0 5px  rgba(255, 255, 255, 0.6);
+	}
+	100% {
+		box-shadow: 0 0 2px  rgba(255, 255, 255, 0.6);
+	}
+}
+
 #ChangeTeamPanel.show{
 	transform: translatex(0px);
 }
@@ -15,6 +39,11 @@
 	height: 23px;
 	wash-color: #9fafc6;
 	transition: transform 0.5s ease-in-out 0s, wash-color 0.2s ease-in-out 0s;
+
+	animation-name: radial;
+	animation-duration: 2s;
+	animation-iteration-count: 20;
+	animation-timing-function: linear;
 }
 #ChangeTeamTextWrap{
 	vertical-align: center;
@@ -32,11 +61,25 @@
 	color: #9fafc6;
 }
 #ChangeTeamPanel:hover Image{
+	animation-duration: 0s;
 	transform: rotateZ(-180deg);
+	wash-color: #aabbd5;
 }
 #ChangeTeamPanel:active Label{
 	color: #d6e8ff;
 }
 #ChangeTeamPanel:active Image{
 	wash-color: #d6e8ff;
+}
+
+@keyframes 'radial' {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	50% {
+		transform: rotateZ(-180deg);
+	}
+	100% {
+		transform: rotateZ(-360deg);
+	}
 }

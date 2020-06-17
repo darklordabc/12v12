@@ -88,6 +88,25 @@
 				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_gpm_t0.png"/>
 				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_gpm_t1.png"/>
 				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_gpm_t2.png"/>
+				
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_str_for_kill_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_str_for_kill_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_str_for_kill_t2.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_agi_for_kill_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_agi_for_kill_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_agi_for_kill_t2.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_int_for_kill_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_int_for_kill_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_int_for_kill_t2.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cleave_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cleave_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cleave_t2.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cd_after_deadth_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cd_after_deadth_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_cd_after_deadth_t2.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_manaburn_t0.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_manaburn_t1.png"/>
+				<Image src="file://{resources}/layout/custom_game/common/patreon/game_perk/icons/patreon_perk_manaburn_t2.png"/>
 			</Panel>
 		</Panel>
 

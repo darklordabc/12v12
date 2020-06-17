@@ -7,12 +7,15 @@
 		<include src="file://{resources}/scripts/custom_game/loading_screen.js" />
 	</scripts>
 	<Panel class="MegaDotaRoot">
-		<Image id="mega_bg" src="file://{resources}/images/custom_game/manyplayer_dota.png" />
+		<Image id="mega_bg" src="file://{resources}/images/custom_game/12v12_background.png" />
 
 		<Panel id="LoadingScreenTipsPanel">
 			<Panel id="PrevTip" onactivate="prevHint()"/>
-			<Image id="LoadingTipImage" />
-			<Label id="LoadingTipText" />
+			<Image id="LoadingTipImage"/>
+			<Panel id="LoadingTipTextWrap">
+				<Label id="LoadingTipText"/>
+			</Panel>
+		
 			<Panel class="NextTip" onactivate="nextHint()"/>
 		</Panel>
 		<Panel style="visibility: collapse;">

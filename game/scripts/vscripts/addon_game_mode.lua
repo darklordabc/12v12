@@ -74,6 +74,7 @@ function Precache( context )
 
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_chen.vsndevts", context )
 	PrecacheResource( "particle", "particles/alert_ban_hammer.vpcf", context )
+	PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_weapon_bfury/faceless_void_weapon_bfury_cleave_c.vpcf", context )
 	
 	local heroeskv = LoadKeyValues("scripts/heroes.txt")
 	for hero, _ in pairs(heroeskv) do
@@ -127,7 +128,7 @@ function CMegaDotaGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetPauseEnabled(IsInToolsMode())
 	GameRules:SetGoldTickTime( 0.3 ) -- default is 0.6
 	GameRules:LockCustomGameSetupTeamAssignment(true)
-	GameRules:SetCustomGameSetupAutoLaunchDelay(1)
+	GameRules:SetCustomGameSetupAutoLaunchDelay(2)
 	GameRules:GetGameModeEntity():SetKillableTombstones( true )
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
 	
@@ -503,6 +504,32 @@ function CMegaDotaGameMode:OnNPCSpawned(event)
 	local spawnedUnit = EntIndexToHScript(event.entindex)
 	local tokenTrollCouter = "modifier_troll_feed_token_couter"
 
+	--if spawnedUnit and 
+	if spawnedUnit and spawnedUnit.reduceCooldownAfterRespawn and _G.lastHeroKillers[spawnedUnit] then
+		local killersTeam = _G.lastHeroKillers[spawnedUnit]:GetTeamNumber()
+		if killersTeam ~=spawnedUnit:GetTeamNumber() and killersTeam~= DOTA_TEAM_NEUTRALS then
+			for i = 0, 20 do
+				local item = spawnedUnit:GetItemInSlot(i)
+				if item then
+					local cooldown_remaining = item:GetCooldownTimeRemaining()
+					if cooldown_remaining > 0 then
+						item:EndCooldown()
+						item:StartCooldown(cooldown_remaining-(cooldown_remaining/100*spawnedUnit.reduceCooldownAfterRespawn))
+					end
+				end
+			end
+			for i = 0, 30 do
+				local ability = spawnedUnit:GetAbilityByIndex(i)
+				if ability then
+					local cooldown_remaining = ability:GetCooldownTimeRemaining()
+					if cooldown_remaining > 0 then
+						ability:EndCooldown()
+						ability:StartCooldown(cooldown_remaining-(cooldown_remaining/100*spawnedUnit.reduceCooldownAfterRespawn))
+					end
+				end
+			end
+		end
+	end
 	-- Assignment of tokens during quick death, maximum 3
 	if spawnedUnit and (_G.lastDeathTimes[spawnedUnit] ~= nil) and (spawnedUnit:GetDeaths() > 1) and ((GameRules:GetGameTime() - _G.lastDeathTimes[spawnedUnit]) < TROLL_FEED_TOKEN_TIME_DIES_WITHIN) and not spawnedUnit:HasModifier("modifier_troll_debuff_stop_feed") and (_G.lastHeroKillers[spawnedUnit]~=spawnedUnit) and (not (UnitInSafeZone(spawnedUnit, _G.lastHerosPlaceLastDeath[spawnedUnit]))) and (_G.lastHeroKillers[spawnedUnit]:GetTeamNumber()~=DOTA_TEAM_NEUTRALS) then
 		local maxToken = TROLL_FEED_NEED_TOKEN_TO_BUFF
@@ -1117,7 +1144,6 @@ function GetBlockItemByID(id)
 end
 
 function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
-	for i,x in pairs(filterTable) do print(i,x) end
 	local orderType = filterTable.order_type
 	local playerId = filterTable.issuer_player_id_const
 	local target = filterTable.entindex_target ~= 0 and EntIndexToHScript(filterTable.entindex_target) or nil

@@ -66,11 +66,25 @@ var patreons_game_perks = {
 //"patreon_perk_gpm_t0": 0,
 //"patreon_perk_gpm_t1": 1,
 //"patreon_perk_gpm_t2": 2,
+"patreon_perk_str_for_kill_t0": 0,
+"patreon_perk_str_for_kill_t1": 1,
+"patreon_perk_str_for_kill_t2": 2,
+"patreon_perk_agi_for_kill_t0": 0,
+"patreon_perk_agi_for_kill_t1": 1,
+"patreon_perk_agi_for_kill_t2": 2,
+"patreon_perk_int_for_kill_t0": 0,
+"patreon_perk_int_for_kill_t1": 1,
+"patreon_perk_int_for_kill_t2": 2,
+"patreon_perk_cleave_t0": 0,
+"patreon_perk_cleave_t1": 1,
+"patreon_perk_cleave_t2": 2,
+"patreon_perk_cd_after_deadth_t0": 0,
+"patreon_perk_cd_after_deadth_t1": 1,
+"patreon_perk_cd_after_deadth_t2": 2,
+"patreon_perk_manaburn_t0": 0,
+"patreon_perk_manaburn_t1": 1,
+"patreon_perk_manaburn_t2": 2,
 };
-
-var patreons_game_perks_have_only_low_tier = {
-	//"patreon_perk_bonus_agi_10": true,
-}
 
 var patreonLevel = 0;
 var patreonCurrentPerk;
@@ -184,12 +198,6 @@ function CreatePatreonsGamePerks(){
 
 		var perkPanelListForTier = $.CreatePanel("Panel", patreonGamePerksTier, "");
 		perkPanelListForTier.AddClass("PerkPanelListForTier");
-
-		for (var key in patreons_game_perks_have_only_low_tier) {
-			if (patreons_game_perks[key] < patreonLevel){
-				patreons_game_perks[key] = patreonLevel
-			}
-		}
 
 		for (var key in patreons_game_perks) {
 			if (patreons_game_perks[key] == tier){
