@@ -1,0 +1,36 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/voting_for_game_options.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/layout/custom_game/common/utils.js" />
+		<include src="file://{resources}/scripts/custom_game/voting_for_game_options.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="VoteOption">
+			<Panel class="VoteOption">
+				<Button id="VoteOptionButton">
+					<Label id="VoteOptionText" text=""/>
+				</Button>
+				<Panel id="VoteOptionLocalVote"/>
+				<Panel id="VoteOptionTotalVotesWrap">
+					<Label id="VoteOptionTotalVotesText" text="0"/>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel style="width:100%;height:100%;">
+		<Panel id="VoteOptionsGrid">
+			<Panel id="VoteOptionsHeaderWrap">
+				<Label id="VoteOptionsHeaderText" text="VOTE OPTIONS"/>
+			</Panel>
+			<Panel id="VoteOptionsTotalVotesWrap">
+				<Label id="VoteOptionsTotalVotesText" text="Votes"/>
+			</Panel>
+			<Panel id="VoteOptionsButtons"/>
+		</Panel>
+	</Panel>
+</root>

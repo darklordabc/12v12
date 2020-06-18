@@ -36,6 +36,7 @@ require("common/init")
 require("util")
 require("neutral_items_drop_choice")
 require("gpm_lib")
+require("game_options/game_options")
 
 WebApi.customGame = "Dota12v12"
 
@@ -47,6 +48,8 @@ LinkLuaModifier("modifier_troll_feed_token", 'anti_feed_system/modifier_troll_fe
 LinkLuaModifier("modifier_troll_feed_token_couter", 'anti_feed_system/modifier_troll_feed_token_couter', LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_troll_debuff_stop_feed", 'anti_feed_system/modifier_troll_debuff_stop_feed', LUA_MODIFIER_MOTION_NONE)
 
+LinkLuaModifier("modifier_super_tower","game_options/modifiers_lib/modifier_super_tower", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_mega_creep","game_options/modifiers_lib/modifier_mega_creep", LUA_MODIFIER_MOTION_NONE)
 
 _G.newStats = newStats or {}
 _G.personalCouriers = {}
@@ -128,7 +131,7 @@ function CMegaDotaGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetPauseEnabled(IsInToolsMode())
 	GameRules:SetGoldTickTime( 0.3 ) -- default is 0.6
 	GameRules:LockCustomGameSetupTeamAssignment(true)
-	GameRules:SetCustomGameSetupAutoLaunchDelay(2)
+	GameRules:SetCustomGameSetupAutoLaunchDelay(10)
 	GameRules:GetGameModeEntity():SetKillableTombstones( true )
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
 	
@@ -213,6 +216,8 @@ function CMegaDotaGameMode:InitGameMode()
 
 		return 0.6
 	end )
+	
+	GameOptions:Init()
 end
 
 function IsInBugZone(pos)
@@ -502,9 +507,12 @@ LinkLuaModifier("modifier_rax_bonus", LUA_MODIFIER_MOTION_NONE)
 
 function CMegaDotaGameMode:OnNPCSpawned(event)
 	local spawnedUnit = EntIndexToHScript(event.entindex)
-	local tokenTrollCouter = "modifier_troll_feed_token_couter"
-
-	--if spawnedUnit and 
+	local tokenTrollCouter = "modifier_troll_feed_token_couter" 
+	
+	if GameOptions:OptionsIsActive("mega_creeps") and spawnedUnit:GetName() == "npc_dota_creep_lane" then
+		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_mega_creep", {duration = -1})
+	end
+ 	
 	if spawnedUnit and spawnedUnit.reduceCooldownAfterRespawn and _G.lastHeroKillers[spawnedUnit] then
 		local killersTeam = _G.lastHeroKillers[spawnedUnit]:GetTeamNumber()
 		if killersTeam ~=spawnedUnit:GetTeamNumber() and killersTeam~= DOTA_TEAM_NEUTRALS then
@@ -807,6 +815,13 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 	end
 
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+		if GameOptions:OptionsIsActive("super_towers") then
+			local towers = Entities:FindAllByClassname('npc_dota_tower')
+			for _, tower in pairs(towers) do
+				print("GO SUPER TOWER")
+				tower:AddNewModifier(tower, nil, "modifier_super_tower", {duration = -1})
+			end
+		end
 		
 		local parties = {}
 		-- Set up player colors
