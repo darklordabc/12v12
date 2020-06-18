@@ -3,7 +3,6 @@ const votesForInitOption = 12;
 
 function VotingOptionsInit() {
 	const votingPanel = $("#VoteOptionsButtons");
-	votingPanel.GetParent().GetParent().GetParent().style.marginLeft = "0px";
 	votingPanel.RemoveAndDeleteChildren();
 
 	const createEventForVoteButton = function (panel, index) {

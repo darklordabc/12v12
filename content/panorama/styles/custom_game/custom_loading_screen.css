@@ -19,7 +19,7 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
 	opacity: 0.6;
 }
 #PrevTip
@@ -61,12 +61,12 @@
 
 #LoadingScreenTipsPanel {
     width: 600px;
-    height: 125px;
-	margin-top: 75px;
-    margin-left: 5px;
-    horizontal-align: left;
+    height: 100px;
+	margin-bottom: 600px;
+    margin-left: 92px;
+    align: left center;
     flow-children: right;
-	background-color: gradient( linear, 0% 0%, 0% 100%, from(rgba(44, 60, 62, 0.27)), to(rgba(15, 17, 17, 0.38)) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from(rgba(33, 43, 45, 0.15)), to(rgba(15, 17, 17, 0.38)) );
 }
 
 #LoadingScreenTipsPanel.darkened {
@@ -79,12 +79,12 @@
 }
 
 #LoadingTipImage {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     background-color: #000000;
 	vertical-align: center;
 	margin-left: 3px;
-    border: 1px solid rgba(118, 132, 134, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.56);
 }
 
 #LoadingTipText {
