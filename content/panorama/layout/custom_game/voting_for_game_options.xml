@@ -25,10 +25,10 @@
 	<Panel style="width:100%;height:100%;">
 		<Panel id="VoteOptionsGrid">
 			<Panel id="VoteOptionsHeaderWrap">
-				<Label id="VoteOptionsHeaderText" text="VOTE OPTIONS"/>
+				<Label id="VoteOptionsHeaderText" text="#vote_options_header"/>
 			</Panel>
 			<Panel id="VoteOptionsTotalVotesWrap">
-				<Label id="VoteOptionsTotalVotesText" text="Votes"/>
+				<Label id="VoteOptionsTotalVotesText" text="#vote_options_total_votes"/>
 			</Panel>
 			<Panel id="VoteOptionsButtons"/>
 		</Panel>

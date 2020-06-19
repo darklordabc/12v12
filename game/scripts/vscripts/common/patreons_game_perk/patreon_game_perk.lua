@@ -130,7 +130,12 @@ RegisterCustomEventListener("set_patreon_game_perk", function(data)
 	else
 		Timers:CreateTimer(3, function()
 			hero = player:GetAssignedHero()
-			hero:AddNewModifier(hero, nil, newModifierName, {duration = -1})
+			if hero then
+				hero:AddNewModifier(hero, nil, newModifierName, {duration = -1})
+				return nil
+			else 
+				return 1
+			end
 		end)
 	end
 end)

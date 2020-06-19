@@ -507,11 +507,7 @@ LinkLuaModifier("modifier_rax_bonus", LUA_MODIFIER_MOTION_NONE)
 
 function CMegaDotaGameMode:OnNPCSpawned(event)
 	local spawnedUnit = EntIndexToHScript(event.entindex)
-	local tokenTrollCouter = "modifier_troll_feed_token_couter" 
-	
-	if GameOptions:OptionsIsActive("mega_creeps") and spawnedUnit:GetName() == "npc_dota_creep_lane" then
-		spawnedUnit:AddNewModifier(spawnedUnit, nil, "modifier_mega_creep", {duration = -1})
-	end
+	local tokenTrollCouter = "modifier_troll_feed_token_couter"
  	
 	if spawnedUnit and spawnedUnit.reduceCooldownAfterRespawn and _G.lastHeroKillers[spawnedUnit] then
 		local killersTeam = _G.lastHeroKillers[spawnedUnit]:GetTeamNumber()
@@ -618,20 +614,9 @@ function CMegaDotaGameMode:OnNPCSpawned(event)
 		end
 
 		--local psets = Patreons:GetPlayerSettings(playerId)
-
 		if not PlayerResource:GetPlayer(playerId).dummyInventory then
-			local team = spawnedUnit:GetTeamNumber()
-			local startPointSpawn = {
-				[2] = Entities:FindByClassname(nil, "info_courier_spawn_radiant"),
-				[3] = Entities:FindByClassname(nil, "info_courier_spawn_dire"),
-			}
-			startPointSpawn = startPointSpawn[team]:GetAbsOrigin() + (RandomFloat(100, 100))
-			local dInventory = CreateUnitByName("npc_dummy_inventory", startPointSpawn, true, spawnedUnit, spawnedUnit, team)
-			dInventory:SetControllableByPlayer(playerId, true)
-			dInventory:AddNewModifier(dInventory, nil, "modifier_dummy_inventory", {duration = -1})
-			PlayerResource:GetPlayer(playerId).dummyInventory = dInventory
+			CreateDummyInventoryForPlayer(playerId, spawnedUnit)
 		end
-
 		--if psets.level > 1 and _G.personalCouriers[playerId] == nil then
 		--	local courier_spawn = {
 		--		[2] = Entities:FindByClassname(nil, "info_courier_spawn_radiant"),
@@ -641,6 +626,22 @@ function CMegaDotaGameMode:OnNPCSpawned(event)
 		--	CreatePrivateCourier(playerId, spawnedUnit, courier_spawn[team]:GetAbsOrigin())
 		--end
 	end
+end
+
+function CreateDummyInventoryForPlayer(playerId, unit)
+	if PlayerResource:GetPlayer(playerId).dummyInventory then
+		PlayerResource:GetPlayer(playerId).dummyInventory:Kill(nil, nil)
+	end
+	local team = unit:GetTeamNumber()
+	local startPointSpawn = {
+		[2] = Entities:FindByClassname(nil, "info_courier_spawn_radiant"),
+		[3] = Entities:FindByClassname(nil, "info_courier_spawn_dire"),
+	}
+	startPointSpawn = startPointSpawn[team]:GetAbsOrigin() + (RandomFloat(100, 100))
+	local dInventory = CreateUnitByName("npc_dummy_inventory", startPointSpawn, true, unit, unit, team)
+	dInventory:SetControllableByPlayer(playerId, true)
+	dInventory:AddNewModifier(dInventory, nil, "modifier_dummy_inventory", {duration = -1})
+	PlayerResource:GetPlayer(playerId).dummyInventory = dInventory
 end
 
 function CMegaDotaGameMode:ModifierGainedFilter(filterTable)
@@ -2968,7 +2969,7 @@ end
 function ChatSound(phrase, playerId)
 	local all_heroes = HeroList:GetAllHeroes()
 	for _, hero in pairs(all_heroes) do
-		if hero:IsRealHero() and hero:IsControllableByAnyPlayer() and hero:GetPlayerID() and (not _G.tPlayersMuted[hero:GetPlayerID()] or not _G.tPlayersMuted[hero:GetPlayerID()][playerId]) then
+		if hero:IsRealHero() and hero:IsControllableByAnyPlayer() and hero:GetPlayerID() and ((not _G.tPlayersMuted[hero:GetPlayerID()]) or (not _G.tPlayersMuted[hero:GetPlayerID()][playerId])) then
 			EmitAnnouncerSoundForPlayer(phrase, hero:GetPlayerID())
 			if phrase == "soundboard.ceb.start" then
 				Timers:CreateTimer(2, function()
@@ -2989,9 +2990,9 @@ RegisterCustomEventListener("set_mute_player", function(data)
 	local disable = data.disable
 	_G.tPlayersMuted[fromId] = _G.tPlayersMuted[fromId] or {}
 	if disable == 0 then
-		_G.tPlayersMuted[fromId][toId] = nil
+		_G.tPlayersMuted[fromId][toId] = false
 	else
-		_G.tPlayersMuted[fromId][toId] = disable
+		_G.tPlayersMuted[fromId][toId] = true
 	end
 end)
 _G.changeTeamProgress = false
@@ -3064,7 +3065,7 @@ function ChangeTeam(playerID, newTeam)
 		if IsValidEntity(hero) then
 			-- Set the time left until we respawn
 			hero:SetTimeUntilRespawn(1)
-
+			CreateDummyInventoryForPlayer(hero:GetPlayerOwnerID(), hero)
 			-- Check if we have any meepo clones
 			if hero:HasAbility('arc_warden_tempest_double') then
 				local clones = Entities:FindAllByName(hero:GetClassname())

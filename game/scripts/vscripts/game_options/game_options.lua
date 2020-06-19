@@ -8,11 +8,6 @@ local gameOptions = {
 		votes = 0,
 		players = {}
 	},
-	[1] = {
-		name = "mega_creeps",
-		votes = 0,
-		players = {}
-	},
 }
 
 function GameOptions:Init()

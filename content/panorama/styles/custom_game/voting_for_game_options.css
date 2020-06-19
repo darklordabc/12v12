@@ -9,6 +9,7 @@
 #VoteOptionsHeaderWrap {
 	width: 100%;
 	background-color: rgba(4, 5, 26, 0.3);
+	height: 33px;
 }
 #VoteOptionsTotalVotesWrap {
 	width: 100%;
@@ -17,7 +18,10 @@
 	align: center center;
 	font-weight: lighter;
 	color: gainsboro;
-	font-size: 27px;
+	font-size: 28px;
+	text-overflow: shrink;
+	text-align: center;
+	width: 100%;
 }
 #VoteOptionsTotalVotesText {
 	align: right center;
@@ -58,7 +62,7 @@
 	color: gainsboro;
 	text-align: center;
 }
-#VoteOptionTotalVotesText.init{
+#VoteOptionTotalVotesText.init {
 	text-shadow: 0px 0px 2px 1 #ffd600;
 }
 #VoteOptionButton {
@@ -68,10 +72,10 @@
 	box-shadow: inset rgba(255, 255, 255, 0.07) -2px 1px 1px -1px;
 	transition: brightness 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
 }
-#VoteOptionButton:hover{
+#VoteOptionButton:hover {
 	brightness: 2;
 }
-#VoteOptionButton.active{
+#VoteOptionButton.active {
 	brightness: 2;
 }
 #VoteOptionText {

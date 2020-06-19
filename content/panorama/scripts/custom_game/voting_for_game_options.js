@@ -1,21 +1,27 @@
-const gameOptions = ["Super Towers", "Mega Creeps"];
+const gameOptions = ["game_option_super_towers"];
 const votesForInitOption = 12;
 
 function VotingOptionsInit() {
 	const votingPanel = $("#VoteOptionsButtons");
 	votingPanel.RemoveAndDeleteChildren();
 
-	const createEventForVoteButton = function (panel, index) {
+	const createEventForVoteButton = function (panel, index, optionName) {
 		panel.SetPanelEvent("onactivate", function () {
 			PlayerVote(panel, index);
+		});
+		panel.SetPanelEvent("onmouseover", function () {
+			$.DispatchEvent("DOTAShowTextTooltip", panel, $.Localize(optionName + "_tooltip"));
+		});
+		panel.SetPanelEvent("onmouseout", function () {
+			$.DispatchEvent("DOTAHideTextTooltip", panel);
 		});
 	};
 	gameOptions.forEach((optionName, index) => {
 		const newOption = $.CreatePanel("Panel", votingPanel, "GameOption_" + index);
 		newOption.BLoadLayoutSnippet("VoteOption");
-		newOption.FindChildTraverse("VoteOptionText").text = optionName;
+		newOption.FindChildTraverse("VoteOptionText").text = $.Localize(optionName);
 		newOption.vote = false;
-		createEventForVoteButton(newOption, index);
+		createEventForVoteButton(newOption, index, optionName);
 	});
 
 	const removeCancelButton = () => {

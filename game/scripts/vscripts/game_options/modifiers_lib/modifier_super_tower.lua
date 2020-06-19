@@ -7,16 +7,23 @@ function modifier_super_tower:RemoveOnDeath() return false end
 function modifier_super_tower:DeclareFunctions()
 	return {
 		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
-		MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS
+		MODIFIER_PROPERTY_EXTRA_HEALTH_BONUS,
+		MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT
 	}
 end
+
 function modifier_super_tower:GetTexture()
 	return "super_tower"
 end
+
 function modifier_super_tower:GetModifierPreAttack_BonusDamage()
-	return 110
+	return 35
 end
 
-function modifier_super_tower:GetModifierPhysicalArmorBonus()
-	return 12
+function modifier_super_tower:GetModifierExtraHealthBonus()
+	return 2000
+end
+
+function modifier_super_tower:GetModifierBaseAttackTimeConstant()
+	return 0.65
 end

@@ -47,10 +47,12 @@ function DropItem(data)
 end
 function CheckNeutralItemForUnit(unit)
 	local count = 0
-	for i = 0, 20 do
-		local item = unit:GetItemInSlot(i)
-		if item then
-			if _G.neutralItems[item:GetAbilityName()] then count = count + 1 end
+	if unit and unit:HasInventory() then
+		for i = 0, 20 do
+			local item = unit:GetItemInSlot(i)
+			if item then
+				if _G.neutralItems[item:GetAbilityName()] then count = count + 1 end
+			end
 		end
 	end
 	return count
