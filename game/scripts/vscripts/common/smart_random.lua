@@ -34,7 +34,7 @@ local function pickRandomHeroFromList(playerId, list, callback)
 
 	getBannedHeroes(function(bannedHeroes)
 		for _, heroName in ipairs(table.shuffled(list)) do
-			if not PlayerResource:IsHeroSelected(heroName) and not bannedHeroes[heroName] then
+			if not PlayerResource:IsHeroSelected(heroName, false) and not bannedHeroes[heroName] then
 				UTIL_Remove(CreateHeroForPlayer(heroName, player))
 				return callback(true)
 			end
