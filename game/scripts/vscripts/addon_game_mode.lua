@@ -78,7 +78,7 @@ function Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_chen.vsndevts", context )
 	PrecacheResource( "particle", "particles/alert_ban_hammer.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_weapon_bfury/faceless_void_weapon_bfury_cleave_c.vpcf", context )
-	
+
 	local heroeskv = LoadKeyValues("scripts/heroes.txt")
 	for hero, _ in pairs(heroeskv) do
 		PrecacheResource( "soundfile", "soundevents/voscripts/game_sounds_vo_"..string.sub(hero,15)..".vsndevts", context )
@@ -97,7 +97,7 @@ _G.ItemKVs = {}
 function CMegaDotaGameMode:InitGameMode()
 	_G.ItemKVs = LoadKeyValues("scripts/npc/npc_block_items_for_troll.txt")
 	print( "10v10 Mode Loaded!" )
-  
+
 	local neutral_items = LoadKeyValues("scripts/npc/neutral_items.txt")
 
 	_G.neutralItems = {}
@@ -134,7 +134,7 @@ function CMegaDotaGameMode:InitGameMode()
 	GameRules:SetCustomGameSetupAutoLaunchDelay(10)
 	GameRules:GetGameModeEntity():SetKillableTombstones( true )
 	GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)
-	
+
 	if IsInToolsMode() then
 		GameRules:GetGameModeEntity():SetDraftingBanningTimeOverride(0)
 	end
@@ -167,7 +167,7 @@ function CMegaDotaGameMode:InitGameMode()
 				local pos = hero:GetAbsOrigin()
 
 				if IsInBugZone(pos) then
-					FindClearSpaceForUnit(hero, oldpos, false)	
+					FindClearSpaceForUnit(hero, oldpos, false)
 				end
 			end)
 		end
@@ -216,7 +216,7 @@ function CMegaDotaGameMode:InitGameMode()
 
 		return 0.6
 	end )
-	
+
 	GameOptions:Init()
 end
 
@@ -337,7 +337,7 @@ end
 function CMegaDotaGameMode:OnHeroPicked(event)
 	local hero = EntIndexToHScript(event.heroindex)
 	if not hero then return end
-	
+
 	if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
 		table.insert(_G.tableRadiantHeroes, hero)
 	end
@@ -385,13 +385,13 @@ function CMegaDotaGameMode:OnEntityKilled( event )
 	local killedUnit
     local killer
 	local name
-	
+
 	if (entindex_killed) then
 		killedUnit = EntIndexToHScript(entindex_killed)
 		name = killedUnit:GetUnitName()
 	end
 	if (entindex_attacker) then killer = EntIndexToHScript(entindex_attacker) end
-	
+
 	local raxRespawnTimeWorth = {
 		npc_dota_goodguys_range_rax_top = 1,
 		npc_dota_goodguys_melee_rax_top = 2,
@@ -480,7 +480,7 @@ function CMegaDotaGameMode:OnEntityKilled( event )
 
 	    timeLeft = timeLeft + addedTime
 	    --print(timeLeft)
-		
+
 		timeLeft = timeLeft + ((raxBonuses[killedUnit:GetTeam()] - raxBonuses[killedUnit:GetOpposingTeamNumber()]) * (1-respawnReduction))
 
 	    if timeLeft < 1 then
@@ -508,7 +508,7 @@ LinkLuaModifier("modifier_rax_bonus", LUA_MODIFIER_MOTION_NONE)
 function CMegaDotaGameMode:OnNPCSpawned(event)
 	local spawnedUnit = EntIndexToHScript(event.entindex)
 	local tokenTrollCouter = "modifier_troll_feed_token_couter"
- 	
+
 	if spawnedUnit and spawnedUnit.reduceCooldownAfterRespawn and _G.lastHeroKillers[spawnedUnit] then
 		local killersTeam = _G.lastHeroKillers[spawnedUnit]:GetTeamNumber()
 		if killersTeam ~=spawnedUnit:GetTeamNumber() and killersTeam~= DOTA_TEAM_NEUTRALS then
@@ -733,7 +733,7 @@ end
 function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
 
-	if newState ==  DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then 
+	if newState ==  DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 		AutoTeam:Init()
 	end
 
@@ -823,7 +823,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 				tower:AddNewModifier(tower, nil, "modifier_super_tower", {duration = -1})
 			end
 		end
-		
+
 		local parties = {}
 		-- Set up player colors
 		for id = 0, 23 do
@@ -837,7 +837,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 		if parties then
 			CustomNetTables:SetTableValue("game_state", "parties", parties)
 		end
-		
+
 		if not IsDedicatedServer() then
 			Timers:CreateTimer(3, function()
 				CustomGameEventManager:Send_ServerToAllClients("is_local_server", {})
@@ -857,7 +857,7 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
 				return nil
 			end
 		})
-		
+
         local fountains = Entities:FindAllByClassname('ent_dota_fountain')
 		-- Loop over all ents
         for k,fountain in pairs(fountains) do
@@ -1242,7 +1242,7 @@ function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
 			end
 		end
 	end
-	
+
 	if orderType == 38 then
 		if _G.neutralItems[ability:GetAbilityName()] then
 			if CheckCountOfNeutralItemsForPlayer(playerId) >= _G.MAX_NEUTRAL_ITEMS_FOR_PLAYER then
@@ -1251,7 +1251,7 @@ function CMegaDotaGameMode:ExecuteOrderFilter(filterTable)
 			end
 		end
 	end
-	
+
 	if orderType == DOTA_UNIT_ORDER_DROP_ITEM or orderType == DOTA_UNIT_ORDER_EJECT_ITEM_FROM_STASH then
 		if ability and itemsToBeDestroy[ability:GetAbilityName()] then
 			ability:Destroy()
@@ -3007,9 +3007,9 @@ function CheckTeamBalance()
 
 	for playerID = 0, 23 do
 		local state = PlayerResource:GetConnectionState(playerID)
-		if 
-			state ~= DOTA_CONNECTION_STATE_DISCONNECTED 
-			and (state == DOTA_CONNECTION_STATE_CONNECTED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED) 
+		if
+			state ~= DOTA_CONNECTION_STATE_DISCONNECTED
+			and (state == DOTA_CONNECTION_STATE_CONNECTED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED)
 		then
 			local team = PlayerResource:GetTeam(playerID)
 			if team == DOTA_TEAM_GOODGUYS then
@@ -3019,7 +3019,7 @@ function CheckTeamBalance()
 			end
 		end
 	end
-	
+
 	if math.abs(radiantPlayers-direPlayers) >= MIN_DIFFERNCE_PLAYERS_IN_TEAM then
 		local highTeam = DOTA_TEAM_GOODGUYS
 		if radiantPlayers < direPlayers then
@@ -3044,36 +3044,57 @@ RegisterCustomEventListener("PlayerChangeTeam", function(data)
 	ChangeTeam(data.PlayerID, newTeam)
 end)
 
+function PlayerForFeedBack(team)
+	for id = 0, 23 do
+		local state = PlayerResource:GetConnectionState(id)
+		if (PlayerResource:GetTeam(id) == team) and (state == DOTA_CONNECTION_STATE_ABANDONED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED) then
+			return id
+		end
+	end
+	return nil
+end
+
 function ChangeTeam(playerID, newTeam)
 	if _G.changeTeamProgress then return end
 	if _G.changeTeamTimes[playerID] and (GameRules:GetGameTime() - _G.changeTeamTimes[playerID]) < COOLDOWN_FOR_CHANGE_TEAM then
 		DisplayError(playerID, "Cooldown for change team")
 		return
-	end 
+	end
+	local feedbackChangeTeamPlayer = PlayerForFeedBack(newTeam)
+	if not feedbackChangeTeamPlayer then return end
 	_G.changeTeamTimes[playerID] = GameRules:GetGameTime()
 	_G.changeTeamProgress = true
-	
+
 	CustomGameEventManager:Send_ServerToAllClients("HideTeamChangePanel", {} )
 	CustomGameEventManager:Send_ServerToAllClients("PlayerChangedTeam", {playerId = playerID} )
+
+	local teamForFeedback = DOTA_TEAM_BADGUYS
+	if newTeam == DOTA_TEAM_BADGUYS then
+		teamForFeedback = DOTA_TEAM_GOODGUYS
+	end
+
+	ChangeTeamForPlayer(playerID, newTeam)
+	Timers:CreateTimer(4, function()
+		ChangeTeamForPlayer(feedbackChangeTeamPlayer, teamForFeedback)
+	end)
+	Timers:CreateTimer(5, function()
+		CheckTeamBalance()
+	end)
+end
+
+function ChangeTeamForPlayer(playerID, newTeam)
 	PlayerResource:SetCustomTeamAssignment(playerID, newTeam)
 	local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-
 	if IsValidEntity(hero) then
-		-- Change the team
 		hero:SetTeam(newTeam)
-
-		-- Kill the hero
 		hero:Kill(nil, hero)
-		--hero:SetGold(0, true)
 
 		if IsValidEntity(hero) then
-			-- Set the time left until we respawn
+
 			hero:SetTimeUntilRespawn(1)
 			CreateDummyInventoryForPlayer(hero:GetPlayerOwnerID(), hero)
-			-- Check if we have any meepo clones
 			if hero:HasAbility('arc_warden_tempest_double') then
 				local clones = Entities:FindAllByName(hero:GetClassname())
-
 				for _,tempestDouble in pairs(clones) do
 					if tempestDouble:IsTempestDouble() and playerID == tempestDouble:GetPlayerID() then
 						tempestDouble:Kill(nil, nil)
@@ -3081,7 +3102,6 @@ function ChangeTeam(playerID, newTeam)
 				end
 			end
 
-			-- Check if we have any meepo clones
 			if hero:HasAbility('meepo_divided_we_stand') then
 				local clones = Entities:FindAllByName(hero:GetClassname())
 
@@ -3091,7 +3111,7 @@ function ChangeTeam(playerID, newTeam)
 					end
 				end
 			end
-			-- Check which units we should change team
+
 			for spell, name in pairs(ts_entities.Switch) do
 				if hero:HasAbility(spell) then
 					local units = Entities:FindAllByName(name)
@@ -3107,7 +3127,7 @@ function ChangeTeam(playerID, newTeam)
 					end
 				end
 			end
-			-- Check which units we should kill
+
 			for spell, name in pairs(ts_entities.Kill) do
 				if hero:HasAbility(spell) then
 					local units = Entities:FindAllByName(name)
@@ -3122,7 +3142,7 @@ function ChangeTeam(playerID, newTeam)
 					end
 				end
 			end
-			-- Change team for courier and move it in new fountain area
+
 			local couriers = Entities:FindAllByName("npc_dota_courier")
 			for _, courier in pairs(couriers) do
 				if courier:GetPlayerOwnerID() == playerID then
@@ -3141,17 +3161,12 @@ function ChangeTeam(playerID, newTeam)
 					FindClearSpaceForUnit(courier, vNewCourierPount, false)
 				end
 			end
-			
-			-- Recreate personal perk
-			hero:RemoveModifierByName(_G.PlayersPatreonsPerk[playerID])
-			Timers:CreateTimer(2, function()
-				hero:AddNewModifier(hero, nil, _G.PlayersPatreonsPerk[playerID], {duration = -1})
-			end)
+			if _G.PlayersPatreonsPerk[playerID] then
+				hero:RemoveModifierByName(_G.PlayersPatreonsPerk[playerID])
+				Timers:CreateTimer(2, function()
+					hero:AddNewModifier(hero, nil, _G.PlayersPatreonsPerk[playerID], {duration = -1})
+				end)
+			end
 		end
 	end
-	
-	-- Check balance again
-	Timers:CreateTimer(3, function()
-		CheckTeamBalance()
-	end)
 end

@@ -63,7 +63,7 @@
 		"DOTA_Tooltip_ability_item_patreonbundle_1_Description"			"<h1>Использование</h1>Содержит полный набор расходников Новоцвета для обычных игр."
 		"DOTA_Tooltip_ability_item_patreonbundle_2"						"Пристанище зимы: комплект расходников"
 		"DOTA_Tooltip_ability_item_patreonbundle_2_Description"			"<h1>Использование</h1>Содержит полный набор расходников как для обычных игр, так и для режима «Пристанище зимы»."
-		
+
 		"nopatreonerror"											"Этот предмет только для поддержавших"
 		"nopatreonerror2"											"Только высокоуровневые поддержавшие (25$) могут использовать этот предмет"
 		"notyettime"												"Этот предмет можно использовать только после 5-ой минуты игры."
@@ -83,7 +83,7 @@
 		"DOTA_Tooltip_ability_item_banhammer"						"Kick Troll"
 		"DOTA_Tooltip_ability_item_banhammer_Description"			"<h1>Использование: Голосование</h1>Начните голосовение против союзника-тролля, что-бы выгнать его из игры. Решение принимается командой. Используйте данный предмет с умом. Поддержавшие не могут быть изгнаны из игры."
 		"DOTA_Tooltip_ability_item_banhammer_Lore"					"С большой властью приходит большая ответственность."
-		
+
 		"DOTA_Tooltip_modifier_silencer_new_int_steal"					"Украденный интеллект"
 		"DOTA_Tooltip_modifier_silencer_new_int_steal_Description"		"Silencer навсегда крадет 1 единицу интеллекта у убитого вражеского героя."
 		"DOTA_Tooltip_ability_special_bonus_unique_silencer_2"			"+1 к краже интеллекта"
@@ -104,7 +104,7 @@
 		"destroyed_badguys_melee_rax"									"Время возрождения команды сил тьмы увеличено на 2 секунды, а сил света уменьшено на 2 секунды"
 		"destroyed_badguys_range_rax"									"Время возрождения команды сил тьмы увеличено на 1 секунду, а сил света уменьшено на 1 секунду"
 		"destroyed_badguys_all_rax"										"Все казармы сил тьмы уничтожены. Время возрождения команды сил тьмы увеличено на 2 секунды, а сил света уменьшено на 2 секунды"
-		
+
 		//Chat Wheel
 		"wheel_cooldown"					"Перезарядка"
 		"announcers"						"Комментаторы"
@@ -414,8 +414,8 @@
 		"patreon_perk_gpm_t2"					"Большая Прибыль"
 		"patreon_perk_gpm_t2_tooltip"			"+150 дополнительного золота в минуту"
 		"DOTA_Tooltip_patreon_perk_gpm_t2"		"Талант: Дополнительная Прибыль"
-		
-		
+
+
 		"patreon_perk_str_for_kill_t0"							"Плюшевый Мясник"
 		"patreon_perk_str_for_kill_t0_tooltip"					"+1 к силе за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_str_for_kill_t0"				"Талант: Мясник"
@@ -428,7 +428,7 @@
 		"patreon_perk_str_for_kill_t2_tooltip"					"+3 к силе за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_str_for_kill_t2"				"Талант: Мясник"
 		"DOTA_Tooltip_patreon_perk_str_for_kill_t2_Description"	"Сила увеличена на %dMODIFIER_PROPERTY_STATS_STRENGTH_BONUS%"
-		
+
 		"patreon_perk_agi_for_kill_t0"							"Маленький Рейнджер"
 		"patreon_perk_agi_for_kill_t0_tooltip"					"+1 к ловкости за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_agi_for_kill_t0"				"Талант: Рейнджер"
@@ -441,7 +441,7 @@
 		"patreon_perk_agi_for_kill_t2_tooltip"					"+3 к ловкости за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_agi_for_kill_t2"				"Талант: Рейнджер"
 		"DOTA_Tooltip_patreon_perk_agi_for_kill_t2_Description"	"Ловкость увеличена на %dMODIFIER_PROPERTY_STATS_AGILITY_BONUS%"
-		
+
 		"patreon_perk_int_for_kill_t0"							"Подмастерье Мага"
 		"patreon_perk_int_for_kill_t0_tooltip"					"+1 к интеллекту за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_int_for_kill_t0"				"Талант: Боевой Маг"
@@ -454,7 +454,7 @@
 		"patreon_perk_int_for_kill_t2_tooltip"					"+3 к интеллекту за каждое убийство"
 		"DOTA_Tooltip_patreon_perk_int_for_kill_t2"				"Талант: Боевой Маг"
 		"DOTA_Tooltip_patreon_perk_int_for_kill_t2_Description"	"Интеллект увеличен на %dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
-		
+
 		"patreon_perk_cleave_t0"								"Легкое Оружие"
 		"patreon_perk_cleave_t0_tooltip"						"Наносит 20% (10% для героев дальнего боя) урона от атак противникам вокруг основной цели"
 		"DOTA_Tooltip_patreon_perk_cleave_t0"					"Талант: Тяжелое Оружие"
@@ -464,7 +464,7 @@
 		"patreon_perk_cleave_t2"								"Ужасающее Оружие"
 		"patreon_perk_cleave_t2_tooltip"						"Наносит 60% (30% для героев дальнего боя) урона от атак противникам вокруг основной цели"
 		"DOTA_Tooltip_patreon_perk_cleave_t2"					"Талант: Тяжелое Оружие"
-		
+
 		"patreon_perk_cd_after_deadth_t0"						"Базовая Боевая Подготовка"
 		"patreon_perk_cd_after_deadth_t0_tooltip"				"Если вас убил вражеский герой, после возрождения перезарядка ваших предметов и умений уменьшиться на 25%"
 		"DOTA_Tooltip_patreon_perk_cd_after_deadth_t0"			"Талант: Боевая Подготовка"
@@ -474,16 +474,16 @@
 		"patreon_perk_cd_after_deadth_t2"						"Продвинутая Боевая Подготовка"
 		"patreon_perk_cd_after_deadth_t2_tooltip"				"Если вас убил вражеский герой, после возрождения перезарядка ваших предметов и умений уменьшиться на 50%"
 		"DOTA_Tooltip_patreon_perk_cd_after_deadth_t2"			"Талант: Боевая Подготовка"
-		
+
 		"patreon_perk_manaburn_t0"								"Базовое Сжигание Маны"
-		"patreon_perk_manaburn_t0_tooltip"						"Каждая атака сжигает 15 маны врага"
+		"patreon_perk_manaburn_t0_tooltip"						"Каждая атака сжигает 4 маны врага. Наносит урон в соответсвии с соженной маной"
 		"DOTA_Tooltip_patreon_perk_manaburn_t0"					"Талант: Сжигание Маны"
 		"patreon_perk_manaburn_t1"								"Сжигание Маны"
-		"patreon_perk_manaburn_t1_tooltip"						"Каждая атака сжигает 25 маны врага"
+		"patreon_perk_manaburn_t1_tooltip"						"Каждая атака сжигает 8 маны врага. Наносит урон в соответсвии с соженной маной"
 		"DOTA_Tooltip_patreon_perk_manaburn_t1"					"Талант: Сжигание Маны"
 		"patreon_perk_manaburn_t2"								"Продвинутое Сжигание Маны"
-		"patreon_perk_manaburn_t2_tooltip"						"Каждая атака сжигает 35 маны врага"
-		"DOTA_Tooltip_patreon_perk_manaburn_t2"					"Талант: Сжигание Маны"		
+		"patreon_perk_manaburn_t2_tooltip"						"Каждая атака сжигает 16 маны врага. Наносит урон в соответсвии с соженной маной"
+		"DOTA_Tooltip_patreon_perk_manaburn_t2"					"Талант: Сжигание Маны"
 
 		"DOTA_Tooltip_ability_item_patreon_mango"                        "Mango of Appreciation"
 		"DOTA_Tooltip_ability_item_patreon_mango_Description"            "Просим прощения, но поддерживающие нас игроки больше не получают бесплатные ботинки на старте игры. Это сделано в целях улучешния баланса игры. Мы надеемся, Вы не слишком против данного изменения. Мы хотим еще раз поблагодарить Вас за поддержку, мы это действительно ценим. Лучший манго специально для Вас."
@@ -522,13 +522,13 @@
 		"LoadingTip_13"			"Вы можете сохранить свои любыми фразы из колеса чата нажав по ним правой кнопки мышки. Они остаются в меню 'Избранное'. Настройки сохраняются между играми"
 
 		"auto_team_add_patreon"						"Поздравляем! Вы получили бесплатный уровень поддержки для балансировки команд!"
-		
+
 		"change_team_button"						"Смена команды"
 		"player_changed_team"						"сменил команду"
 		"cooldown_for_change_team"					"Смена команды на перезарядке"
 		"player_still_have_a_lot_of_neutral_items"	"У Вас уже есть 3 нейтральных предмета"
 		"unit_still_have_a_lot_of_neutral_items"	"Цель уже имеет 3 нейтральных предмета"
-		
+
 		"vote_options_header"					"ГОЛОСОВАНИЕ ЗА НАСТРОЙКИ"
 		"vote_options_total_votes"				"Голоса"
 		"DOTA_Tooltip_modifier_super_tower"		"Усиленная Башни"

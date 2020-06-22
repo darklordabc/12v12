@@ -34,7 +34,26 @@ end
 function patreon_perk_manaburn_t2:OnAttackLanded(params)
 	if IsServer() then
 		if params.attacker == self:GetParent() then
-			params.target:SpendMana(GetPerkValue(35, self, 1, 0), nil)
+			local targetMana = params.target:GetMana()
+			local manaBurn = GetPerkValue(16, self, 1, 0)
+			if manaBurn > targetMana then
+				manaBurn = targetMana
+			end
+			params.target:SpendMana(manaBurn, nil)
+			if manaBurn > 1 then
+				EmitSoundOnLocationWithCaster( params.target:GetAbsOrigin(), "Hero_Antimage.ManaBreak", params.attacker )
+				local particle = ParticleManager:CreateParticle("particles/generic_gameplay/generic_manaburn.vpcf", PATTACH_ROOTBONE_FOLLOW, params.target)
+				ParticleManager:ReleaseParticleIndex(particle)
+				local damage = {
+					victim = params.target,
+					attacker = params.attacker,
+					damage = manaBurn,
+					damage_type = DAMAGE_TYPE_PHYSICAL,
+					ability = nil
+				}
+				print("MANA DAMAGE ", manaBurn)
+				ApplyDamage(damage)
+			end
 		end
 	end
 end
