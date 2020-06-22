@@ -614,7 +614,7 @@ function CMegaDotaGameMode:OnNPCSpawned(event)
 		end
 
 		--local psets = Patreons:GetPlayerSettings(playerId)
-		if not PlayerResource:GetPlayer(playerId).dummyInventory then
+		if PlayerResource:GetPlayer(playerId) and not PlayerResource:GetPlayer(playerId).dummyInventory then
 			CreateDummyInventoryForPlayer(playerId, spawnedUnit)
 		end
 		--if psets.level > 1 and _G.personalCouriers[playerId] == nil then
@@ -1144,7 +1144,9 @@ end
 
 function CMegaDotaGameMode:OnPlayerDisconnect(data)
 	CustomGameEventManager:Send_ServerToAllClients( "change_leave_status", {leave = true, playerId = data.PlayerID} )
-	CheckTeamBalance()
+	Timers:CreateTimer(1, function()
+		CheckTeamBalance()
+	end)
 	Timers:CreateTimer(310, function()
 		CheckTeamBalance()
 	end)
@@ -2999,6 +3001,7 @@ _G.changeTeamProgress = false
 _G.changeTeamTimes = {}
 
 function CheckTeamBalance()
+	_G.changeTeamProgress = false
 	local radiantPlayers = 0
 	local direPlayers = 0
 
@@ -3016,7 +3019,8 @@ function CheckTeamBalance()
 			end
 		end
 	end
-	if math.abs(radiantPlayers-direPlayers) > (MIN_DIFFERNCE_PLAYERS_IN_TEAM-1) then
+	
+	if math.abs(radiantPlayers-direPlayers) >= MIN_DIFFERNCE_PLAYERS_IN_TEAM then
 		local highTeam = DOTA_TEAM_GOODGUYS
 		if radiantPlayers < direPlayers then
 			highTeam = DOTA_TEAM_BADGUYS
@@ -3027,7 +3031,6 @@ function CheckTeamBalance()
 	else
 		CustomGameEventManager:Send_ServerToAllClients("HideTeamChangePanel", {} )
 	end
-	_G.changeTeamProgress = false
 end
 
 RegisterCustomEventListener("PlayerChangeTeam", function(data)
@@ -3051,6 +3054,7 @@ function ChangeTeam(playerID, newTeam)
 	_G.changeTeamProgress = true
 	
 	CustomGameEventManager:Send_ServerToAllClients("HideTeamChangePanel", {} )
+	CustomGameEventManager:Send_ServerToAllClients("PlayerChangedTeam", {playerId = playerID} )
 	PlayerResource:SetCustomTeamAssignment(playerID, newTeam)
 	local hero = PlayerResource:GetSelectedHeroEntity(playerID)
 

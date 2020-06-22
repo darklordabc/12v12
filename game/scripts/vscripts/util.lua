@@ -73,3 +73,42 @@ function table.concat(tbl1,tbl2)
 
 	return tbl
 end
+
+function CalculateDirection(ent1, ent2)
+	local pos1 = ent1
+	local pos2 = ent2
+	if ent1.GetAbsOrigin then pos1 = ent1:GetAbsOrigin() end
+	if ent2.GetAbsOrigin then pos2 = ent2:GetAbsOrigin() end
+	local direction = (pos1 - pos2):Normalized()
+	return direction
+end
+
+function FindUnitsInCone(teamNumber, vDirection, vPosition, startRadius, endRadius, flLength, hCacheUnit, targetTeam, targetUnit, targetFlags, findOrder, bCache, bIsFullCircle)
+	local unitTable = {}
+	local enemies = FindUnitsInRadius(teamNumber, vPosition, hCacheUnit, endRadius + flLength, targetTeam, targetUnit, targetFlags, findOrder, bCache )
+	if #enemies > 0 then
+		if bIsFullCircle then
+			unitTable = enemies
+		else
+			local vDirectionCone = Vector( vDirection.y, -vDirection.x, 0.0 )
+			for _,enemy in pairs(enemies) do
+				if enemy ~= nil then
+					local vToPotentialTarget = enemy:GetOrigin() - vPosition
+					local flSideAmount = math.abs( vToPotentialTarget.x * vDirectionCone.x + vToPotentialTarget.y * vDirectionCone.y + vToPotentialTarget.z * vDirectionCone.z )
+					local enemy_distance_from_caster = ( vToPotentialTarget.x * vDirection.x + vToPotentialTarget.y * vDirection.y + vToPotentialTarget.z * vDirection.z )
+
+					local max_increased_radius_from_distance = endRadius - startRadius
+
+					local pct_distance = enemy_distance_from_caster / flLength
+
+					local radius_increase_from_distance = max_increased_radius_from_distance * pct_distance
+
+					if ( flSideAmount < startRadius + radius_increase_from_distance ) and ( enemy_distance_from_caster > 0.0 ) and ( enemy_distance_from_caster < flLength ) then
+						table.insert(unitTable, enemy)
+					end
+				end
+			end
+		end
+	end
+	return unitTable
+end

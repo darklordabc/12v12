@@ -49,10 +49,15 @@ local vectors = {
 	[15] = Vector(-0.21941055349670321, 	-0.9756326199006828, 	0.0),
 }
 --------------------------------------------------------------------------------
-function CreateParticleForCleave(particle_name, radius, target)
+function CreateParticleForCleave(particle_name, radius, target, attacker)
+	local multiplayer = 1
+	if not attacker:IsRangedAttacker() then
+		multiplayer = -500
+	end
 	local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, target)
-	for i = 1, 16 do
-		ParticleManager:SetParticleControl(particle, i, target:GetAbsOrigin() + vectors[i - 1]*radius/2  )
+	for i = 0, 15 do
+		local total_point = multiplayer * (target:GetAbsOrigin() - attacker:GetAbsOrigin()):Normalized()
+		ParticleManager:SetParticleControl(particle, i, target:GetAbsOrigin() + vectors[i]*radius/2-total_point)
 	end
 	ParticleManager:ReleaseParticleIndex( particle )
 end
@@ -63,11 +68,26 @@ function patreon_perk_cleave_t0:OnAttackLanded(params)
 			if params.attacker:IsRealHero() and params.attacker:GetTeam() ~= params.target:GetTeam() and (not params.target:IsBuilding()) then
 				local target_loc = params.target:GetAbsOrigin()
 				local cleavePercent = params.attacker:IsRangedAttacker() and 0.1 or 0.2
+				local flagsForSearch = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
 				local damage = params.original_damage * cleavePercent
+				local enemies = FindUnitsInCone(
+					self:GetParent():GetTeamNumber(),
+					CalculateDirection(params.target, self:GetParent()),
+					target_loc,
+					80,
+					280,
+					300,
+					nil,
+					DOTA_UNIT_TARGET_TEAM_ENEMY,
+					flagsForSearch,
+					DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE,
+					FIND_ANY_ORDER,
+					false,
+					params.attacker:IsRangedAttacker()
+				)
 
-				CreateParticleForCleave("particles/econ/items/faceless_void/faceless_void_weapon_bfury/faceless_void_weapon_bfury_cleave_c.vpcf", 300, params.target)
+				CreateParticleForCleave("particles/custom_cleave.vpcf", 100, params.target, params.attacker)
 
-				local enemies = FindUnitsInRadius(params.attacker:GetTeamNumber(), target_loc, nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FIND_ANY_ORDER, false)
 				for _, enemy in pairs(enemies) do
 					if enemy ~= params.target then
 						ApplyDamage({victim = enemy, attacker = params.attacker, damage = damage, damage_type = DAMAGE_TYPE_PURE, damage_flags = DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION})
@@ -76,11 +96,5 @@ function patreon_perk_cleave_t0:OnAttackLanded(params)
 			end
 		end
 	end
-end
-
---------------------------------------------------------------------------------
-function GetPerkValue(const, modifier, levelCounter, bonusPerLevel)
-	local heroLvl = modifier:GetParent():GetLevel()
-	return math.floor(heroLvl/levelCounter)*bonusPerLevel+const
 end
 --------------------------------------------------------------------------------

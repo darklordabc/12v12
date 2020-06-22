@@ -11,8 +11,14 @@
 		<Button id="ChangeTeamPanel" onactivate="ChangeTeam()">
 			<Image id="ChangeTeamIcon" src="s2r://panorama/images/control_icons/refresh_psd.vtex"/>
 			<Panel id="ChangeTeamTextWrap">
-				<Label id="ChangeTeamText" text="Change Team"/>
+				<Label id="ChangeTeamText" text="#change_team_button"/>
 			</Panel>
 		</Button>
+		<Panel id="ChangeTeamNotification">
+			<Panel id="ChangeTeamHeroChangedTeam" hittest="false"/>
+			<Panel id="ChangeTeamPlayerWrap">
+				<Label id="ChangeTeamPlayerText" text=""/>
+			</Panel>
+		</Panel>
 	</Panel>
 </root>

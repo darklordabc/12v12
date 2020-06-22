@@ -97,7 +97,17 @@
 	text-align: center;
 	font-weight: lighter;
 }
+.AspectRatio16x10 #LoadingTipText
+{
+	text-overflow: clip;
+	font-size: 15px;
+}
+.AspectRatio4x3 #LoadingTipText
+{
+	text-overflow: clip;
+	font-size: 14px;
+}
 #LoadingTipTextWrap{
 	height: 100%;
-	width: 71%;
+	width: 74%;
 }

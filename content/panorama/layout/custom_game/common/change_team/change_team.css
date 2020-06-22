@@ -1,40 +1,42 @@
-#ChangeTeamPanel{
+.ChangeTeamRoot {
+	flow-children: down;
+}
+#ChangeTeamPanel {
 	flow-children: right;
 	transition: transform 0.5s ease-in-out 0s;
 	margin-top: 115px;
-	background-color: gradient( linear, 0% 0%, 100% 0%, from( #425663cc ), color-stop( .5, #42566355 ), to( #0000 ) );
+	background-color: gradient(linear, 0% 0%, 100% 0%, from(#425663cc), color-stop(0.5, #42566355), to(#0000));
 	padding: 4px;
 	padding-left: 6px;
 	transform: translatex(-500px);
-	
-	animation-name: glow;
-	animation-duration: 1s;
-	animation-iteration-count: 20;
-	animation-timing-function: linear;
 }
 
 @keyframes 'glow' {
 	0% {
-		box-shadow: 0 0 2px  rgba(255, 255, 255, 0.6);
+		box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
 	}
 	25% {
-		box-shadow: 0 0 5px  rgba(255, 255, 255, 0.6);
+		box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
 	}
 	50% {
 		box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 	}
 	75% {
-		box-shadow: 0 0 5px  rgba(255, 255, 255, 0.6);
+		box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
 	}
 	100% {
-		box-shadow: 0 0 2px  rgba(255, 255, 255, 0.6);
+		box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
 	}
 }
 
-#ChangeTeamPanel.show{
+#ChangeTeamPanel.show {
 	transform: translatex(0px);
+	animation-name: glow;
+	animation-duration: 1s;
+	animation-iteration-count: 20;
+	animation-timing-function: linear;
 }
-#ChangeTeamIcon{
+#ChangeTeamIcon {
 	width: 23px;
 	height: 23px;
 	wash-color: #9fafc6;
@@ -42,33 +44,32 @@
 
 	animation-name: radial;
 	animation-duration: 2s;
-	animation-iteration-count: 20;
 	animation-timing-function: linear;
 }
-#ChangeTeamTextWrap{
+#ChangeTeamTextWrap {
 	vertical-align: center;
 	padding-top: 2px;
 	margin-left: 7px;
 }
-#ChangeTeamText{
+#ChangeTeamText {
 	font-size: 17px;
 	color: #8897ad;
 	text-shadow: 1px 1px 1px 2 rgba(0, 0, 0, 0.4);
 	font-weight: thin;
 	transition: color 0.2s ease-in-out 0s;
 }
-#ChangeTeamPanel:hover Label{
+#ChangeTeamPanel:hover Label {
 	color: #9fafc6;
 }
-#ChangeTeamPanel:hover Image{
+#ChangeTeamPanel:hover Image {
 	animation-duration: 0s;
 	transform: rotateZ(-180deg);
 	wash-color: #aabbd5;
 }
-#ChangeTeamPanel:active Label{
+#ChangeTeamPanel:active Label {
 	color: #d6e8ff;
 }
-#ChangeTeamPanel:active Image{
+#ChangeTeamPanel:active Image {
 	wash-color: #d6e8ff;
 }
 
@@ -82,4 +83,37 @@
 	100% {
 		transform: rotateZ(-360deg);
 	}
+}
+#ChangeTeamHeroChangedTeam {
+	width: 180px;
+	height: 200px;
+	background-color: gradient(linear, 0% 0%, 100% 0%, from(#35434e), to(rgba(0, 0, 0, 0.07)));
+	box-shadow: inset rgba(255, 255, 255, 0.06) -6px 5px 6px -2px;
+}
+#ChangeTeamPlayerWrap{
+	width: 180px;
+	height: 30px;
+	background-color: #282f36;
+	box-shadow: inset rgba(255, 255, 255, 0.06) -3px 1px 2px -1px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.47);
+	padding-top: 1px;
+}
+#ChangeTeamPlayerText{
+	width: 95%;
+	max-height: 100%;
+	align: center center;
+	text-align: center;
+	font-size: 16px;
+	color: #adb8c7;
+	font-weight: lighter;
+	text-overflow: shrink;
+	text-shadow: 1px 1px 1px 2 rgba(0, 0, 0, 0.4);
+}
+#ChangeTeamNotification{
+	flow-children: down;
+	transition: transform 0.5s ease-in-out 0s;
+	transform: translatex(-500px);
+}
+#ChangeTeamNotification.show{
+	transform: translatex(0px);
 }
