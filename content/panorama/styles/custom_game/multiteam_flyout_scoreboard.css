@@ -243,7 +243,7 @@
 
 #Kills,
 #Deaths,
-#Assists
+#Assists,
 {
 	vertical-align: center;
 	font-size: 18px;
@@ -336,6 +336,7 @@
 .is_local_player #Deaths,
 .is_local_player #Assists,
 .is_local_player #Level,
+.is_local_player #RankForPlayerText,
 .is_local_player #HeroName
 {
 	color: white;
@@ -463,4 +464,21 @@
 	height: 25px;
 	border-radius: 100%;
 	align: center center;
+}
+
+#RankForPlayerWrap{
+	width: 55px;
+	height: 100%;
+	align: center center;
+}
+
+#RankForPlayerText{
+	font-size: 18px;
+	align: center center;
+	text-align: center;
+}
+.ScoreCol_Rank{
+	horizontal-align: right;
+	width: 54px;
+	text-align: center;
 }

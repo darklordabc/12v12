@@ -33,7 +33,9 @@ end
 
 function patreon_perk_manaburn_t1:OnAttackLanded(params)
 	if IsServer() then
-		params.target:SpendMana(GetPerkValue(25, self, 1, 0), nil)
+		if params.attacker == self:GetParent() then
+			params.target:SpendMana(GetPerkValue(25, self, 1, 0), nil)
+		end
 	end
 end
 

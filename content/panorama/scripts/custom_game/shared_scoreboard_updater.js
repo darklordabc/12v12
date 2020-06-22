@@ -209,13 +209,26 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		_ScoreboardUpdater_SetTextSafe( playerPanel, "Assists", playerInfo.player_assists );
 		HighlightByParty(playerId, playerPanel.FindChildInLayoutFile("PlayerName"));
 
-		const heroEntIndex = Players.GetPlayerHeroEntityIndex(playerId);
-		const neutralItem = Entities.GetItemInSlot(heroEntIndex, 16);
-		if (neutralItem) {
-			const neutralItemName = Abilities.GetAbilityName(neutralItem);
-			playerPanel.FindChildInLayoutFile("NeutralItem").itemname = neutralItemName;
+		const neutralItemPanel = playerPanel.FindChildInLayoutFile("NeutralItem")
+		if(neutralItemPanel){
+			const heroEntIndex = Players.GetPlayerHeroEntityIndex(playerId);
+			const neutralItem = Entities.GetItemInSlot(heroEntIndex, 16);
+
+			if (neutralItem) {
+				const neutralItemName = Abilities.GetAbilityName(neutralItem);
+				playerPanel.FindChildInLayoutFile("NeutralItem").itemname = neutralItemName;
+			}
 		}
-		
+
+		let rankPanel = $("#RankForPlayerText");
+		if(rankPanel) {
+			let ratingsObj = CustomNetTables.GetTableValue( "game_state", "player_ratings");
+			if(ratingsObj) {
+				let steamId = Game.GetPlayerInfo(playerId).player_steamid;
+				let ratings = Object.values(ratingsObj).filter(r => r.steamId == steamId);
+				if (ratings.length > 0) $("#RankForPlayerText").text = ratings[0]
+			}
+		}
 		var playerPortrait = playerPanel.FindChildInLayoutFile( "HeroIcon" );
 		if ( playerPortrait )
 		{

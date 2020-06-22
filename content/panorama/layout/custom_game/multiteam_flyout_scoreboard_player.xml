@@ -106,6 +106,9 @@
 			<Panel id="NeutralItemWrap" class="ScoreboardPanel">
 				<DOTAItemImage id="NeutralItem"/>
 			</Panel>
+			<Panel id="RankForPlayerWrap" class="ScoreboardPanel">
+				<Label id="RankForPlayerText" text="-----" />
+			</Panel>
 		</Panel>
 		<Panel id="UltimateIndicatorBG" class="UltimateIndicatorShared" />
 		<Panel id="UltimateIndicator" class="UltimateIndicatorShared" />
