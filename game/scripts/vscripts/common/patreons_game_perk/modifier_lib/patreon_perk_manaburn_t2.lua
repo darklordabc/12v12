@@ -51,7 +51,6 @@ function patreon_perk_manaburn_t2:OnAttackLanded(params)
 					damage_type = DAMAGE_TYPE_PHYSICAL,
 					ability = nil
 				}
-				print("MANA DAMAGE ", manaBurn)
 				ApplyDamage(damage)
 			end
 		end
