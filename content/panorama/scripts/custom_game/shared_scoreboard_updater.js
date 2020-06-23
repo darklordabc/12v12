@@ -227,7 +227,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			}
 		}
 
-		let rankPanel = $("#RankForPlayerText");
+		let rankPanel = playerPanel.FindChildInLayoutFile("RankForPlayerText");
 		if(rankPanel) {
 			let ratingsObj = CustomNetTables.GetTableValue( "game_state", "player_ratings");
 			if(ratingsObj) {
