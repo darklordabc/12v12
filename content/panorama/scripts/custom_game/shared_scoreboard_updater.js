@@ -232,7 +232,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 			let playersStats = CustomNetTables.GetTableValue("game_state", "player_stats");
 			if (playersStats) {
 				let playerStats = playersStats[playerId];
-				if (playerStats) rankPanel.text = playerStats.rating;
+				if (playerStats) rankPanel.text = playerStats.rating != undefined ? playerStats.rating : "-----";
 			}
 		}
 
