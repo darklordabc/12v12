@@ -3007,10 +3007,7 @@ function CheckTeamBalance()
 
 	for playerID = 0, 23 do
 		local state = PlayerResource:GetConnectionState(playerID)
-		if
-			state ~= DOTA_CONNECTION_STATE_DISCONNECTED
-			and (state == DOTA_CONNECTION_STATE_CONNECTED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED)
-		then
+		if state == DOTA_CONNECTION_STATE_DISCONNECTED or state == DOTA_CONNECTION_STATE_CONNECTED or state == DOTA_CONNECTION_STATE_NOT_YET_CONNECTED then
 			local team = PlayerResource:GetTeam(playerID)
 			if team == DOTA_TEAM_GOODGUYS then
 				radiantPlayers = radiantPlayers + 1
