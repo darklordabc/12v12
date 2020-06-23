@@ -235,18 +235,6 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 				if (playerStats) rankPanel.text = playerStats.rating;
 			}
 		}
-		
-		SubscribeToNetTableKey('game_state', 'player_stats', function(playerStats) {
-			var localStats = playerStats[Game.GetLocalPlayerID()];
-			if (!localStats) return;
-
-			$('#PlayerStatsAverageWinsLoses').text = localStats.wins + '/' + localStats.loses;
-			$('#PlayerStatsAverageKDA').text = [
-				localStats.averageKills,
-				localStats.averageDeaths,
-				localStats.averageAssists,
-			].map(Math.round).join('/');
-		});
 
 		var playerPortrait = playerPanel.FindChildInLayoutFile( "HeroIcon" );
 		if ( playerPortrait )
