@@ -85,7 +85,11 @@ end
 
 function FindUnitsInCone(teamNumber, vDirection, vPosition, startRadius, endRadius, flLength, hCacheUnit, targetTeam, targetUnit, targetFlags, findOrder, bCache, bIsFullCircle)
 	local unitTable = {}
-	local enemies = FindUnitsInRadius(teamNumber, vPosition, hCacheUnit, endRadius + flLength, targetTeam, targetUnit, targetFlags, findOrder, bCache )
+	local radiusSearch = endRadius + flLength
+	if bIsFullCircle then radiusSearch = flLength end
+
+	local enemies = FindUnitsInRadius(teamNumber, vPosition, hCacheUnit, radiusSearch, targetTeam, targetUnit, targetFlags, findOrder, bCache )
+
 	if #enemies > 0 then
 		if bIsFullCircle then
 			unitTable = enemies
@@ -103,7 +107,7 @@ function FindUnitsInCone(teamNumber, vDirection, vPosition, startRadius, endRadi
 
 					local radius_increase_from_distance = max_increased_radius_from_distance * pct_distance
 
-					if ( flSideAmount < startRadius + radius_increase_from_distance ) and ( enemy_distance_from_caster > 0.0 ) and ( enemy_distance_from_caster < flLength ) then
+					if (( flSideAmount < startRadius + radius_increase_from_distance ) and ( enemy_distance_from_caster > 0.0 ) and ( enemy_distance_from_caster < flLength )) or (vToPotentialTarget:Length2D() < startRadius) then
 						table.insert(unitTable, enemy)
 					end
 				end
