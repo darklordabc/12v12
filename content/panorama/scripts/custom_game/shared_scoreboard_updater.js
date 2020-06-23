@@ -228,14 +228,26 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 		}
 
 		let rankPanel = playerPanel.FindChildInLayoutFile("RankForPlayerText");
-		if(rankPanel) {
-			let ratingsObj = CustomNetTables.GetTableValue( "game_state", "player_ratings");
-			if(ratingsObj) {
-				let steamId = Game.GetPlayerInfo(playerId).player_steamid;
-				let ratings = Object.values(ratingsObj).filter(r => r.steamId == steamId);
-				if (ratings.length > 0) $("#RankForPlayerText").text = ratings[0]
+		if (rankPanel) {
+			let playersStats = CustomNetTables.GetTableValue("game_state", "player_stats");
+			if (playersStats) {
+				let playerStats = playersStats[playerId];
+				if (playerStats) rankPanel.text = playerStats.rating;
 			}
 		}
+		
+		SubscribeToNetTableKey('game_state', 'player_stats', function(playerStats) {
+			var localStats = playerStats[Game.GetLocalPlayerID()];
+			if (!localStats) return;
+
+			$('#PlayerStatsAverageWinsLoses').text = localStats.wins + '/' + localStats.loses;
+			$('#PlayerStatsAverageKDA').text = [
+				localStats.averageKills,
+				localStats.averageDeaths,
+				localStats.averageAssists,
+			].map(Math.round).join('/');
+		});
+
 		var playerPortrait = playerPanel.FindChildInLayoutFile( "HeroIcon" );
 		if ( playerPortrait )
 		{

@@ -102,6 +102,7 @@ function WebApi:BeforeMatch()
 				averageAssists = player.averageAssists,
 				wins = player.wins,
 				loses = player.loses,
+				rating = player.rating,
 			}
 		end
 
