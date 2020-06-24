@@ -351,16 +351,40 @@ function _ScoreboardUpdater_UpdatePlayerPanel( scoreboardConfig, playersContaine
 	_ScoreboardUpdater_SetTextSafe( playerPanel, "PlayerUltimateCooldown", ultStateOrTime );
 }
 
-
 //=============================================================================
 //=============================================================================
-function _ScoreboardUpdater_UpdateTeamPanel( scoreboardConfig, containerPanel, teamDetails, teamsInfo )
-{
-	if ( !containerPanel )
-		return;
-
+function GetAverageRankForTeam(teamId) {
+	let result = 0;
+	const teamPlayers = Game.GetPlayerIDsOnTeam( teamId )
+	const playersStats = CustomNetTables.GetTableValue("game_state", "player_stats");
+	if (playersStats) {
+		teamPlayers.forEach(playerId => {
+			let playerStats = playersStats[playerId];
+			if (playerStats){
+				var rating = playerStats.rating != undefined ? playerStats.rating : 0
+				if(typeof rating == "string") rating = parseInt(rating)
+				result += rating
+			}
+		})
+	}
+	return Math.floor(result/teamPlayers.length);
+}
+//=============================================================================
+//=============================================================================
+function _ScoreboardUpdater_UpdateTeamPanel(scoreboardConfig, containerPanel, teamDetails, teamsInfo) {
+	if (!containerPanel) return;
 	var teamId = teamDetails.team_id;
-//	$.Msg( "_ScoreboardUpdater_UpdateTeamPanel: ", teamId );
+
+	const radiantRankText = containerPanel.FindChild("RadiantHeader").FindChild("RankHeader");
+	const direRankText = containerPanel.FindChild("DireHeader").FindChild("RankHeader");
+	if(radiantRankText && direRankText) {
+		const UpdateHeader = function(panel, teamId) {
+			panel.SetDialogVariable("rank_text", $.Localize("#custom_rating_text"));
+			panel.SetDialogVariable("average_team_rank", GetAverageRankForTeam(teamId));
+		};
+		UpdateHeader(radiantRankText, 2);
+		UpdateHeader(direRankText, 3);
+	}
 
 	var teamPanelName = "_dynamic_team_" + teamId;
 	var teamPanel = containerPanel.FindChild( teamPanelName );
