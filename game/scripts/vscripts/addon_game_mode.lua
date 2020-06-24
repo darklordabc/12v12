@@ -78,6 +78,7 @@ function Precache( context )
 	PrecacheResource( "soundfile", "soundevents/game_sounds_heroes/game_sounds_chen.vsndevts", context )
 	PrecacheResource( "particle", "particles/alert_ban_hammer.vpcf", context )
 	PrecacheResource( "particle", "particles/econ/items/faceless_void/faceless_void_weapon_bfury/faceless_void_weapon_bfury_cleave_c.vpcf", context )
+	PrecacheResource( "particle", "particles/custom_cleave.vpcf", context )
 
 	local heroeskv = LoadKeyValues("scripts/heroes.txt")
 	for hero, _ in pairs(heroeskv) do
@@ -848,7 +849,8 @@ function CMegaDotaGameMode:OnGameRulesStateChange(keys)
             luna_moon_glaive_fountain = 4,
             ursa_fury_swipes_fountain = 1,
         }
-		Convars:SetFloat("host_timescale", 0.7)
+		Timers:RemoveTimer("game_options_unpause")
+		Convars:SetFloat("host_timescale", 0.07)
 		Timers:CreateTimer({
 			useGameTime = false,
 			endTime = 2.1,
