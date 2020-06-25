@@ -1,0 +1,25 @@
+<root>
+	<styles>
+		<include src="file://{resources}/layout/custom_game/common/override_link/override_link.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/layout/custom_game/common/override_link/override_link.js" />
+	</scripts>
+
+	<Panel class="OverrideRoot">
+		<Panel id="OverrideWindow">
+			<Panel id="OverrideTextWrap">
+				<Label id="OverrideText" text="#new_link"/>
+			</Panel>
+			<Image
+				id="PitureLink"
+				onactivate="ExternalBrowserGoToURL('https://steamcommunity.com/sharedfiles/filedetails/?id=2141071809')"
+				src="file://{resources}/images/custom_game/12v12_background.png"
+			/>
+			<Panel id="OverrideTipWrap">
+				<Label id="OverrideTipText" text="#new_link_tip"/>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
