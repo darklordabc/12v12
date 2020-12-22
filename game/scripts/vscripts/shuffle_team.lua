@@ -80,7 +80,15 @@ function ShuffleTeam:SortInMMR()
 	
 	local SortTeams = function()
 	
-		local teams = {
+		local getTeamAverageMMR = function(teams, teamId)
+			local playersCount = #teams[teamId].players
+			if playersCount > 0 then
+				return teams[teamId].mmr / playersCount
+			end
+			return 0
+		end
+	
+		local emptyTeams = {
 			[2] = {
 				players = {},
 				mmr = 0
@@ -91,14 +99,14 @@ function ShuffleTeam:SortInMMR()
 			}
 		}
 	
-		local teamsA = deepcopy(teams)
-		local teamsB = deepcopy(teams)
-		local teamsC = deepcopy(teams)
+		local teamsA = deepcopy(emptyTeams)
+		local teamsB = deepcopy(emptyTeams)
+		local teamsC = deepcopy(emptyTeams)
 		
 		-- Sorting type A: add highest remaining party to lower team until out of parties
 		
 		for _, partyData in pairs(sortedParties) do -- For each party in the party list
-			local teamId = teamsA[2].mmr >= teamsA[3].mmr and 3 or 2 -- Select team with lowest mmr
+			local teamId = getTeamAverageMMR(teamsA, 2) >= getTeamAverageMMR(teamsA, 3) and 3 or 2 -- Select team with lowest mmr
 			
 			-- Add highest mmr party to selected team
 			for _, playerId in pairs(partyData.players) do -- For each player in highest mmr party
@@ -119,7 +127,7 @@ function ShuffleTeam:SortInMMR()
 		-- Sorting type B: add highest and lowest to first team, second highest/lowest to second team, repeat until out of parties
 		
 		for partyID = 1, #sortedParties do -- For each partyID (used instead of pairs() because I grab some parties from the lower end)
-			local teamId = teamsB[2].mmr >= teamsB[3].mmr and 3 or 2 -- Select team with lowest mmr
+			local teamId = getTeamAverageMMR(teamsA, 2) >= getTeamAverageMMR(teamsA, 3) and 3 or 2 -- Select team with lowest mmr
 			
 			-- Add highest mmr party to selected team
 			if partyID <= math.ceil(#sortedParties/2) then
@@ -160,7 +168,7 @@ function ShuffleTeam:SortInMMR()
 		end
 		
 		for partyID = 3, math.ceil(#sortedParties/2+1) do -- for each of half the remaining partyID's (used instead of pairs() because I grab some parties from the lower end)
-			local teamId = teamsC[2].mmr >= teamsC[3].mmr and 3 or 2 -- Select lowest team
+			local teamId = getTeamAverageMMR(teamsA, 2) >= getTeamAverageMMR(teamsA,3) and 3 or 2 -- Select team with lowest mmr
 			
 			-- Add highest mmr party to lower team
 			for _, playerId in pairs(sortedParties[partyID].players) do -- For each player in highest party
