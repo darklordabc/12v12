@@ -768,5 +768,9 @@
 		"IsTempestDoubleClonable"		"0"
 		"ShouldBeInitiallySuggested"	"1"
 	}
+    "item_aghanims_shard"
+	{
+		"ItemInitialStockTime"			"900"
+	}
 
 }
