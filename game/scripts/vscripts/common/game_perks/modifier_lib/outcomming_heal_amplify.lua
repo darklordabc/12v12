@@ -10,6 +10,6 @@ outcomming_heal_amplify_t0 = class(outcomming_heal_amplify)
 outcomming_heal_amplify_t1 = class(outcomming_heal_amplify)
 outcomming_heal_amplify_t2 = class(outcomming_heal_amplify)
 
-function outcomming_heal_amplify_t0:OnCreated() self.v = 7 end
-function outcomming_heal_amplify_t1:OnCreated() self.v = 14 end
-function outcomming_heal_amplify_t2:OnCreated() self.v = 28 end
+function outcomming_heal_amplify_t0:OnCreated() self.v = 8 end
+function outcomming_heal_amplify_t1:OnCreated() self.v = 16 end
+function outcomming_heal_amplify_t2:OnCreated() self.v = 32 end

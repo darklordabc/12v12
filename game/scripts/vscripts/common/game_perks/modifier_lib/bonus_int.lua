@@ -12,6 +12,6 @@ bonus_int_t0 = class(bonus_int)
 bonus_int_t1 = class(bonus_int)
 bonus_int_t2 = class(bonus_int)
 
-function bonus_int_t0:OnCreated() self.v = {0, 1, 0.5} end
-function bonus_int_t1:OnCreated() self.v = {0, 1, 1} end
-function bonus_int_t2:OnCreated() self.v = {0, 1, 2} end
+function bonus_int_t0:OnCreated() self.v = {0, 1, 0.75} end
+function bonus_int_t1:OnCreated() self.v = {0, 1, 1.5} end
+function bonus_int_t2:OnCreated() self.v = {0, 1, 3} end

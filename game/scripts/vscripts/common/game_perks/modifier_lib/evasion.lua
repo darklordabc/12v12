@@ -10,6 +10,6 @@ evasion_t0 = class(evasion)
 evasion_t1 = class(evasion)
 evasion_t2 = class(evasion)
 
-function evasion_t0:OnCreated() self.v = 5 end
-function evasion_t1:OnCreated() self.v = 10 end
-function evasion_t2:OnCreated() self.v = 20 end
+function evasion_t0:OnCreated() self.v = 7 end
+function evasion_t1:OnCreated() self.v = 14 end
+function evasion_t2:OnCreated() self.v = 28 end

@@ -10,6 +10,6 @@ mag_resist_t0 = class(mag_resist)
 mag_resist_t1 = class(mag_resist)
 mag_resist_t2 = class(mag_resist)
 
-function mag_resist_t0:OnCreated() self.v = 5 end
-function mag_resist_t1:OnCreated() self.v = 10 end
-function mag_resist_t2:OnCreated() self.v = 25 end
+function mag_resist_t0:OnCreated() self.v = 7 end
+function mag_resist_t1:OnCreated() self.v = 14 end
+function mag_resist_t2:OnCreated() self.v = 28 end

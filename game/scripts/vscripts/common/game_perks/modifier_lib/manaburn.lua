@@ -7,8 +7,8 @@ function manaburn:GetTexture() return "perkIcons/manaburn" end
 
 function manaburn:OnAttackLanded(params)
 	if not IsServer() then return end
-	if params.attacker ~= self:GetParent() then return end 
-	
+	if params.attacker ~= self:GetParent() then return end
+
 	local target_mana = params.target:GetMana()
 	local mana_burn = self.v
 	if mana_burn > target_mana then
@@ -34,6 +34,6 @@ manaburn_t0 = class(manaburn)
 manaburn_t1 = class(manaburn)
 manaburn_t2 = class(manaburn)
 
-function manaburn_t0:OnCreated() self.v = 4 end
-function manaburn_t1:OnCreated() self.v = 8 end
-function manaburn_t2:OnCreated() self.v = 16 end
+function manaburn_t0:OnCreated() self.v = 8 end
+function manaburn_t1:OnCreated() self.v = 16 end
+function manaburn_t2:OnCreated() self.v = 32 end

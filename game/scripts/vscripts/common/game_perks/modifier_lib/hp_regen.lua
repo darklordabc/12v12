@@ -13,5 +13,5 @@ hp_regen_t1 = class(hp_regen)
 hp_regen_t2 = class(hp_regen)
 
 function hp_regen_t0:OnCreated() self.v = {3, 1, 0} end
-function hp_regen_t1:OnCreated() self.v = {1, 1, 0.5} end
-function hp_regen_t2:OnCreated() self.v = {1, 1, 1} end
+function hp_regen_t1:OnCreated() self.v = {2.5, 1, 0.5} end
+function hp_regen_t2:OnCreated() self.v = {2, 1, 1} end

@@ -7,7 +7,7 @@ function int_for_kill:DeclareFunctions() return { MODIFIER_PROPERTY_STATS_INTELL
 function int_for_kill:OnHeroKilled(keys)
 	if not IsServer() then return end
 	local killerID = keys.attacker:GetPlayerOwnerID()
-	
+
 	if killerID and killerID == self:GetParent():GetPlayerOwnerID() and keys.target:GetTeam() ~= self:GetParent():GetTeam() then
 		self:IncrementStackCount()
 		self:GetParent():CalculateStatBonus(false)
@@ -26,4 +26,4 @@ int_for_kill_t2 = class(int_for_kill)
 
 function int_for_kill_t0:OnCreated() self.v = 1 end
 function int_for_kill_t1:OnCreated() self.v = 2 end
-function int_for_kill_t2:OnCreated() self.v = 3 end
+function int_for_kill_t2:OnCreated() self.v = 4 end

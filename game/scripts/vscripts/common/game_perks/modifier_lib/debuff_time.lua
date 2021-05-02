@@ -10,6 +10,6 @@ debuff_time_t0 = class(debuff_time)
 debuff_time_t1 = class(debuff_time)
 debuff_time_t2 = class(debuff_time)
 
-function debuff_time_t0:OnCreated() self.v = 8 end
-function debuff_time_t1:OnCreated() self.v = 16 end
-function debuff_time_t2:OnCreated() self.v = 32 end
+function debuff_time_t0:OnCreated() self.v = 10 end
+function debuff_time_t1:OnCreated() self.v = 20 end
+function debuff_time_t2:OnCreated() self.v = 40 end

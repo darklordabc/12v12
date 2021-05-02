@@ -10,10 +10,14 @@ function spell_lifesteal:OnTakeDamage(params)
 	if params.damage <= 0 then return end
 	if bit.band(params.damage_flags, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then return end
 	if params.infilctor or DOTA_DAMAGE_CATEGORY_ATTACK == params.damage_category then return end
-	
+
 	local attacker = params.attacker
 	local steal = math.max(1, params.damage * ( self.v / 100))
-	
+
+	if params.target and (not params.target:IsHero()) then
+		steal = 0.5 * steal
+	end
+
 	attacker:Heal(steal, self)
 	local particle = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_OVERHEAD_FOLLOW, params.attacker)
 	ParticleManager:SetParticleControl(particle, 0, params.attacker:GetAbsOrigin())
@@ -24,6 +28,6 @@ spell_lifesteal_t0 = class(spell_lifesteal)
 spell_lifesteal_t1 = class(spell_lifesteal)
 spell_lifesteal_t2 = class(spell_lifesteal)
 
-function spell_lifesteal_t0:OnCreated() self.v = 2 end
-function spell_lifesteal_t1:OnCreated() self.v = 4 end
-function spell_lifesteal_t2:OnCreated() self.v = 8 end
+function spell_lifesteal_t0:OnCreated() self.v = 3 end
+function spell_lifesteal_t1:OnCreated() self.v = 6 end
+function spell_lifesteal_t2:OnCreated() self.v = 12 end

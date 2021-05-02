@@ -10,6 +10,6 @@ bonus_hp_pct_t0 = class(bonus_hp_pct)
 bonus_hp_pct_t1 = class(bonus_hp_pct)
 bonus_hp_pct_t2 = class(bonus_hp_pct)
 
-function bonus_hp_pct_t0:OnCreated() self.v = 6 end
-function bonus_hp_pct_t1:OnCreated() self.v = 12 end
-function bonus_hp_pct_t2:OnCreated() self.v = 18 end
+function bonus_hp_pct_t0:OnCreated() self.v = 5 end
+function bonus_hp_pct_t1:OnCreated() self.v = 10 end
+function bonus_hp_pct_t2:OnCreated() self.v = 20 end

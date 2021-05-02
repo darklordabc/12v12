@@ -7,10 +7,10 @@ function cd_after_death:GetTexture() return "perkIcons/cd_after_death" end
 
 function cd_after_death:OnDeath(params)
 	if not IsServer() then return end
-	
+
 	local parent = self:GetParent()
 	if params.unit ~= parent then return end
-	
+
 	if not parent:IsReincarnating() then
 		parent.reduceCooldownAfterRespawn = self.v
 	else
@@ -23,5 +23,5 @@ cd_after_death_t1 = class(cd_after_death)
 cd_after_death_t2 = class(cd_after_death)
 
 function cd_after_death_t0:OnCreated() self.v = 25 end
-function cd_after_death_t1:OnCreated() self.v = 35 end
-function cd_after_death_t2:OnCreated() self.v = 50 end
+function cd_after_death_t1:OnCreated() self.v = 50 end
+function cd_after_death_t2:OnCreated() self.v = 100 end
