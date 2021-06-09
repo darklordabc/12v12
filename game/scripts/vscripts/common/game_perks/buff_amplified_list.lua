@@ -38,6 +38,7 @@ amplified_modifier = {
 	["modifier_lycan_shapeshift_aura"] = true,
 	["modifier_magnataur_empower"] = true,
 	["modifier_night_stalker_crippling_fear_aura"] = true,
+	["modifier_night_stalker_darkness"] = true,
 	["modifier_omniknight_repel"] = true,
 	["modifier_omninight_guardian_angel"] = true,
 	["modifier_phoenix_fire_spirit_count"] = true,
