@@ -893,8 +893,8 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"100"
-		"AbilityCooldown"				"60"
-		"AbilityCastRange"				"400"
+		"AbilityCooldown"				"45"
+		"AbilityCastRange"				"500"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
@@ -912,7 +912,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"60.0"
+				"block_cooldown"		"45.0"
 			}
 		}
 	}
@@ -928,8 +928,8 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"200"
-		"AbilityCooldown"				"45"
-		"AbilityCastRange"				"550"
+		"AbilityCooldown"				"35"
+		"AbilityCastRange"				"600"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
@@ -947,7 +947,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"45.0"
+				"block_cooldown"		"35.0"
 			}
 		}
 	}
@@ -963,7 +963,7 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"300"
-		"AbilityCooldown"				"30"
+		"AbilityCooldown"				"25"
 		"AbilityCastRange"				"700"
 		
 		"ItemStackable"					"0"
@@ -982,7 +982,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"30.0"
+				"block_cooldown"		"25.0"
 			}
 		}
 	}
@@ -999,7 +999,7 @@
 		"AbilityManaCost"               "0"
 		"ItemCost"						"300"
 		"AbilityCooldown"				"15"
-		"AbilityCastRange"				"900"
+		"AbilityCastRange"				"800"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
