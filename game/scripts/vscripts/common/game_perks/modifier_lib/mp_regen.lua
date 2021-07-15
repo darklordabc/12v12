@@ -13,7 +13,7 @@ mp_regen_t1 = class(mp_regen)
 mp_regen_t2 = class(mp_regen)
 mp_regen_t3 = class(mp_regen)
 
-function mp_regen_t0:OnCreated() self.v = {1.5, 1, 0} end
-function mp_regen_t1:OnCreated() self.v = {1, 1, 0.2} end
-function mp_regen_t2:OnCreated() self.v = {2, 1, 0.4} end
-function mp_regen_t3:OnCreated() self.v = {4, 1, 0.8} end
+function mp_regen_t0:OnCreated() self.v = {0.75, 1, 0.1} end
+function mp_regen_t1:OnCreated() self.v = {1.5, 1, 0.2} end
+function mp_regen_t2:OnCreated() self.v = {3, 1, 0.4} end
+function mp_regen_t3:OnCreated() self.v = {6, 1, 0.8} end
