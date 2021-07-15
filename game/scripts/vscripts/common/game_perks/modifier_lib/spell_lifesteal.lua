@@ -29,7 +29,7 @@ spell_lifesteal_t1 = class(spell_lifesteal)
 spell_lifesteal_t2 = class(spell_lifesteal)
 spell_lifesteal_t3 = class(spell_lifesteal)
 
-function spell_lifesteal_t0:OnCreated() self.v = 3 end
-function spell_lifesteal_t1:OnCreated() self.v = 6 end
-function spell_lifesteal_t2:OnCreated() self.v = 12 end
-function spell_lifesteal_t3:OnCreated() self.v = 24 end
+function spell_lifesteal_t0:OnCreated() self.v = 5 end
+function spell_lifesteal_t1:OnCreated() self.v = 10 end
+function spell_lifesteal_t2:OnCreated() self.v = 20 end
+function spell_lifesteal_t3:OnCreated() self.v = 40 end
