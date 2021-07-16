@@ -893,8 +893,8 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"100"
-		"AbilityCooldown"				"45"
-		"AbilityCastRange"				"500"
+		"AbilityCooldown"				"60"
+		"AbilityCastRange"				"700"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
@@ -907,12 +907,12 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"buff_duration"			"3"
+				"buff_duration"			"7"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"45.0"
+				"block_cooldown"		"60.0"
 			}
 		}
 	}
@@ -928,8 +928,8 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"200"
-		"AbilityCooldown"				"35"
-		"AbilityCastRange"				"600"
+		"AbilityCooldown"				"45"
+		"AbilityCastRange"				"700"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
@@ -942,12 +942,12 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"buff_duration"			"4"
+				"buff_duration"			"7"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"35.0"
+				"block_cooldown"		"45.0"
 			}
 		}
 	}
@@ -963,7 +963,7 @@
 		
 		"AbilityManaCost"               "0"
 		"ItemCost"						"300"
-		"AbilityCooldown"				"25"
+		"AbilityCooldown"				"30"
 		"AbilityCastRange"				"700"
 		
 		"ItemStackable"					"0"
@@ -977,12 +977,12 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"buff_duration"			"5"
+				"buff_duration"			"7"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"block_cooldown"		"25.0"
+				"block_cooldown"		"30.0"
 			}
 		}
 	}
@@ -999,7 +999,7 @@
 		"AbilityManaCost"               "0"
 		"ItemCost"						"300"
 		"AbilityCooldown"				"15"
-		"AbilityCastRange"				"800"
+		"AbilityCastRange"				"700"
 		
 		"ItemStackable"					"0"
 		"ItemKillable"                  "1"
@@ -1012,7 +1012,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"buff_duration"			"6"
+				"buff_duration"			"7"
 			}
 			"02"
 			{
