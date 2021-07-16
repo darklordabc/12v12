@@ -15,7 +15,7 @@ function spell_lifesteal:OnTakeDamage(params)
 	local steal = math.max(1, params.damage * ( self.v / 100))
 
 	if params.target and (not params.target:IsHero()) then
-		steal = 0.5 * steal
+		steal = 0.2 * steal
 	end
 
 	attacker:Heal(steal, self)
