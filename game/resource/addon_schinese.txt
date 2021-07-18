@@ -562,15 +562,15 @@
 		"DOTA_Tooltip_agi_for_kill_t2_Description"	"敏捷增加%dMODIFIER_PROPERTY_STATS_AGILITY_BONUS%"
 
 		"int_for_kill_t0"							"法师学徒"
-		"int_for_kill_t0_tooltip"					"每次击杀+1.2智力"
+		"int_for_kill_t0_tooltip"					"每次击杀+1智力"
 		"DOTA_Tooltip_int_for_kill_t0"				"个人特权：战斗法师"
 		"DOTA_Tooltip_int_for_kill_t0_Description"	"智力提高%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
 		"int_for_kill_t1"							"战斗法师"
-		"int_for_kill_t1_tooltip"					"每次击杀+2.4智力"
+		"int_for_kill_t1_tooltip"					"每次击杀+2智力"
 		"DOTA_Tooltip_int_for_kill_t1"				"个人特权：战斗法师"
 		"DOTA_Tooltip_int_for_kill_t1_Description"	"智力提高%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
 		"int_for_kill_t2"							"大法师"
-		"int_for_kill_t2_tooltip"					"每次击杀+3.6智力"
+		"int_for_kill_t2_tooltip"					"每次击杀+4智力"
 		"DOTA_Tooltip_int_for_kill_t2"				"个人特权：战斗法师"
 		"DOTA_Tooltip_int_for_kill_t2_Description"	"智力提高%dMODIFIER_PROPERTY_STATS_INTELLECT_BONUS%"
 
