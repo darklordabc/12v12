@@ -785,11 +785,12 @@
 		"DOTA_Tooltip_buff_amplify_t3"		"Personal Perk: Blessings Amplify"
 		
 		"family_t0"							"Family"
-		"family_t0_tooltip"					"Grants a random perk from the next tier (First Tier)"
+		"family_t0_tooltip"					"Grants a random perk from the next tier (Tier 2, Tier 4 is roughly 2x the power of Tier 3)"
 		"family_t1"							"Strong Family"
-		"family_t1_tooltip"					"Grants a random perk from the next tier (Second Tier)"
+		"family_t1_tooltip"					"Grants a random perk from the next tier (Tier 3, Tier 4 is roughly 2x the power of Tier 3)"
 		"family_t2"							"The Strongest Family"
-		"family_t2_tooltip"					"Grants a random perk from the next tier (Third Tier which are roughly 2x the power of Second Tier perks)"
+		"family_t2_tooltip"					"Grants a random perk from the next tier (Tier 4, Tier 4 is roughly 2x the power of Tier 3)"
+		"DOTA_Tooltip_family_t0" 			"Family"
 		
 		"HighSupportersOnly"					"High Supporters Only"
 		"SupportersOnly"						"Supporters Only"
