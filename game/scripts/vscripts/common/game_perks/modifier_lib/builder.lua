@@ -49,7 +49,7 @@ builder_t1 = class(builder)
 builder_t2 = class(builder)
 builder_t3 = class(builder)
 
-function builder_t0:OnCreated() self.v = 15 self:StartIntervalThink(30) end
-function builder_t1:OnCreated() self.v = 30 self:StartIntervalThink(30) end
-function builder_t2:OnCreated() self.v = 60 self:StartIntervalThink(30) end
-function builder_t3:OnCreated() self.v = 120 self:StartIntervalThink(30) end
+function builder_t0:OnCreated() self.v = 15 self:StartIntervalThink(15) end
+function builder_t1:OnCreated() self.v = 30 self:StartIntervalThink(15) end
+function builder_t2:OnCreated() self.v = 60 self:StartIntervalThink(15) end
+function builder_t3:OnCreated() self.v = 120 self:StartIntervalThink(15) end
