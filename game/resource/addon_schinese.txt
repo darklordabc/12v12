@@ -386,13 +386,13 @@
 		"DOTA_Tooltip_bonus_all_stats_t2" 	"个人特权：所有数据"
 
         "attack_range_t0"					"初级攻击范围"
-        "attack_range_t0_tooltip"			"+40攻击范围（远程英雄）或+25攻击范围（近战英雄）"
+        "attack_range_t0_tooltip"			"+40攻击范围（远程英雄）或+30攻击范围（近战英雄）"
         "DOTA_Tooltip_attack_range_t0" 	"个人特权：攻击范围"
         "attack_range_t1"					"攻击范围"
-        "attack_range_t1_tooltip"			"+80攻击范围（远程英雄）或+50攻击范围（近战英雄）"
+        "attack_range_t1_tooltip"			"+80攻击范围（远程英雄）或+60攻击范围（近战英雄）"
         "DOTA_Tooltip_attack_range_t1" 	"个人特权：攻击范围"
         "attack_range_t2"					"高级攻击范围"
-        "attack_range_t2_tooltip"			"+160攻击范围（远程英雄）或+100攻击范围（近战英雄）"
+        "attack_range_t2_tooltip"			"+160攻击范围（远程英雄）或+120攻击范围（近战英雄）"
         "DOTA_Tooltip_attack_range_t2" 	"个人特权：攻击范围"
 
         "bonus_hp_pct_t0"					"铜铸体质"
@@ -635,13 +635,13 @@
 		"DOTA_Tooltip_hunter_t2"				"个人特权：猎人"
 
 		"builder_t0"								"初级建造者"
-		"builder_t0_tooltip"						"每30秒为生命值最低的塔回复15点生命值"
+		"builder_t0_tooltip"						"每15秒为生命值最低的塔回复15点生命值"
 		"DOTA_Tooltip_builder_t0"					"个人特权：建造者"
 		"builder_t1"								"建造者"
-		"builder_t1_tooltip"						"每30秒为生命值最低的塔回复30点生命值"
+		"builder_t1_tooltip"						"每15秒为生命值最低的塔回复30点生命值"
 		"DOTA_Tooltip_builder_t1"					"个人特权：建造者"
 		"builder_t2"								"专业建造者"
-		"builder_t2_tooltip"						"每30秒为生命值最低的塔回复60点生命值"
+		"builder_t2_tooltip"						"每15秒为生命值最低的塔回复60点生命值"
 		"DOTA_Tooltip_builder_t2"					"个人特权：建造者"
 		"DOTA_Tooltip_modifier_builder_tower"		"建造者治疗"
 
