@@ -11,7 +11,7 @@ bonus_movespeed_t1 = class(bonus_movespeed)
 bonus_movespeed_t2 = class(bonus_movespeed)
 bonus_movespeed_t3 = class(bonus_movespeed)
 
-function bonus_movespeed_t0:OnCreated() self.v = 10 end
-function bonus_movespeed_t1:OnCreated() self.v = 20 end
-function bonus_movespeed_t2:OnCreated() self.v = 40 end
-function bonus_movespeed_t3:OnCreated() self.v = 80 end
+function bonus_movespeed_t0:OnCreated() self.v = 15 end
+function bonus_movespeed_t1:OnCreated() self.v = 30 end
+function bonus_movespeed_t2:OnCreated() self.v = 60 end
+function bonus_movespeed_t3:OnCreated() self.v = 120 end

@@ -11,7 +11,7 @@ cast_range_t1 = class(cast_range)
 cast_range_t2 = class(cast_range)
 cast_range_t3 = class(cast_range)
 
-function cast_range_t0:OnCreated() self.v = 50 end
-function cast_range_t1:OnCreated() self.v = 100 end
-function cast_range_t2:OnCreated() self.v = 200 end
-function cast_range_t3:OnCreated() self.v = 400 end
+function cast_range_t0:OnCreated() self.v = 45 end
+function cast_range_t1:OnCreated() self.v = 90 end
+function cast_range_t2:OnCreated() self.v = 180 end
+function cast_range_t3:OnCreated() self.v = 360 end

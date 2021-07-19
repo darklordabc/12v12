@@ -23,7 +23,7 @@ cd_after_death_t1 = class(cd_after_death)
 cd_after_death_t2 = class(cd_after_death)
 cd_after_death_t3 = class(cd_after_death)
 
-function cd_after_death_t0:OnCreated() self.v = 25 end
-function cd_after_death_t1:OnCreated() self.v = 50 end
-function cd_after_death_t2:OnCreated() self.v = 75 end
+function cd_after_death_t0:OnCreated() self.v = 40 end
+function cd_after_death_t1:OnCreated() self.v = 60 end
+function cd_after_death_t2:OnCreated() self.v = 80 end
 function cd_after_death_t3:OnCreated() self.v = 100 end
